@@ -1,0 +1,10 @@
+includes:
+    - vendor/symplify/coding-standard/config/symplify-rules.neon
+    - vendor/symplify/phpstan-extensions/config/config.neon
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests
+    excludes_analyse:
+        - src/Kernel.php

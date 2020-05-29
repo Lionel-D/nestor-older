@@ -30,11 +30,13 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.12.25",
         "rector/rector": "^0.7.26",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*"
+        "symfony/test-pack": "*",
+        "symplify/easy-coding-standard": "^7.3.18"
     },
     "config": {
         "preferred-install": {
@@ -62,8 +64,11 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "ecs": "vendor/bin/ecs check --fix --ansi",
+        "ecsdry": "vendor/bin/ecs check --ansi",
         "rectordry": "vendor/bin/rector process --dry-run --ansi",
         "rector": "vendor/bin/rector process --ansi",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --ansi --error-format symplify",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"

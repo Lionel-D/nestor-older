@@ -1,4 +1,7 @@
 {
+    "composer/semver": {
+        "version": "1.5.1"
+    },
     "composer/xdebug-handler": {
         "version": "1.4.1"
     },
@@ -84,6 +87,18 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
+        },
+        "files": [
+            ".php_cs.dist"
+        ]
+    },
     "jean85/pretty-package-versions": {
         "version": "1.2"
     },
@@ -116,6 +131,9 @@
     },
     "php": {
         "version": "7.2"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
@@ -170,6 +188,18 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "slevomat/coding-standard": {
+        "version": "6.3.8"
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        }
     },
     "symfony/asset": {
         "version": "v5.0.8"
@@ -541,13 +571,22 @@
     "symplify/autowire-array-parameter": {
         "version": "v7.3.18"
     },
+    "symplify/coding-standard": {
+        "version": "v7.3.18"
+    },
     "symplify/console-color-diff": {
+        "version": "v7.3.18"
+    },
+    "symplify/easy-coding-standard": {
         "version": "v7.3.18"
     },
     "symplify/package-builder": {
         "version": "v7.3.18"
     },
     "symplify/parameter-name-guard": {
+        "version": "v7.3.18"
+    },
+    "symplify/phpstan-extensions": {
         "version": "v7.3.18"
     },
     "symplify/set-config-resolver": {
