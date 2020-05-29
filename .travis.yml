@@ -1,0 +1,63 @@
+# Project language
+language: php
+
+# Language version
+php: 7.2.31
+
+#services:
+#    - mysql
+
+# Blocklist
+branches:
+    except:
+        - feature/*
+        - hotfix/*
+        - release/*
+
+# Env variables
+env:
+    global:
+        - CC_TEST_REPORTER_ID=2c00049151ac789c3d8a59b61d302d58ef6a332acc697c8ff40184294cbb3e9c
+
+# Cache config
+cache:
+    yarn: true
+    directories:
+        - $HOME/.composer/cache/files
+        - ./bin/.phpunit
+
+# Update composer
+before_install:
+    - composer self-update
+
+# Install project, dependencies & testing suite
+install:
+    - composer install
+    - cp .env.test .env
+    - ./bin/phpunit install
+#    - yarn install
+
+# Build assets
+before_script:
+#    - yarn encore dev
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
+    - ./cc-test-reporter before-build
+
+# Run tests
+script:
+    - ./bin/phpunit --coverage-clover clover.xml
+    # this checks that the YAML config files contain no syntax errors
+    - ./bin/console lint:yaml config --parse-tags
+    # this checks that the Twig template files contain no syntax errors
+    - ./bin/console lint:twig templates --env=prod
+    # this checks that the XLIFF translations contain no syntax errors
+    - ./bin/console lint:xliff translations
+    # this checks that the application doesn't use dependencies with known security vulnerabilities
+    - ./bin/console security:check
+    # this checks that Doctrine's mapping configurations are valid
+    - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+# Call codeclimate reporter for test coverage
+after_script:
+    - ./cc-test-reporter after-build --coverage-input-type clover --id $CC_TEST_REPORTER_ID --exit-code $TRAVIS_TEST_RESULT
