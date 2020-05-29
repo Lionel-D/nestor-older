@@ -30,6 +30,7 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "rector/rector": "^0.7.26",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
@@ -61,6 +62,8 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "rectordry": "vendor/bin/rector process --dry-run --ansi",
+        "rector": "vendor/bin/rector process --ansi",
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
