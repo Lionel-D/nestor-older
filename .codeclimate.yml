@@ -1,0 +1,10 @@
+version: "2"
+
+exclude_patterns:
+    - "bin/"
+    - "config/"
+    - "nodes_modules/"
+    - "public/"
+    - "translations/"
+    - "var/"
+    - "vendor/"
