@@ -4,9 +4,9 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class HomepageControllerTest extends WebTestCase
+final class HomepageControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIndex(): void
     {
         $client = static::createClient();
         $client->request('GET', '/');
