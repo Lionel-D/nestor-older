@@ -17,7 +17,7 @@ branches:
 # Env variables
 env:
     global:
-        - CC_TEST_REPORTER_ID=2c00049151ac789c3d8a59b61d302d58ef6a332acc697c8ff40184294cbb3e9c
+        - CC_TEST_REPORTER_ID=151eb0273dc02310f4b492974ab602d856eb60da9b95016ee4dfda30a833410c
 
 # Cache config
 cache:
