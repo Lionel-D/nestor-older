@@ -8,3 +8,5 @@ parameters:
         - tests
     excludes_analyse:
         - src/Kernel.php
+    autoload_files:
+        - bin/.phpunit/phpunit-8.5-0/vendor/autoload.php

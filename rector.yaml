@@ -17,4 +17,6 @@ parameters:
         - "tests"
     exclude_paths:
         - "src/Kernel.php"
+    autoload_paths:
+        - "bin/.phpunit/phpunit-8.5-0/vendor/autoload.php"
     symfony_container_xml_path: "var/cache/dev/App_KernelDevDebugContainer.xml"
