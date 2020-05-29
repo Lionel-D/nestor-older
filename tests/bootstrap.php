@@ -1,11 +1,18 @@
 <?php
 
-use Symfony\Component\Dotenv\Dotenv;
+$commands = ['php "%s/../bin/console" cache:clear --no-warmup'];
 
-require dirname(__DIR__).'/vendor/autoload.php';
-
-if (file_exists(dirname(__DIR__).'/config/bootstrap.php')) {
-    require dirname(__DIR__).'/config/bootstrap.php';
-} elseif (method_exists(Dotenv::class, 'bootEnv')) {
-    (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
+if (isset($_ENV['BOOTSTRAP_LOCAL_TEST_ENV'])) {
+    $localTestEnv = $_ENV['BOOTSTRAP_LOCAL_TEST_ENV'];
+    $prefix = 'APP_ENV=%s ';
 }
+
+foreach ($commands as $command) {
+    if (isset($prefix) && isset($localTestEnv)) {
+        passthru(sprintf($prefix.$command, $localTestEnv, __DIR__));
+    } else {
+        passthru(sprintf($command, __DIR__));
+    }
+}
+
+require __DIR__.'/../config/bootstrap.php';
