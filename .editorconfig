@@ -11,7 +11,7 @@ indent_style = space
 indent_size = 4
 
 # XML Configuration Files
-[*.xml]
+[*.{xml,xml.dist}]
 indent_size = 2
 
 # Web Files
