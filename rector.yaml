@@ -1,0 +1,22 @@
+parameters:
+    sets:
+        - "celebrity"
+        - "code-quality"
+        - "coding-style"
+        - "dead-code"
+        - "naming"
+        - "php73"
+        - "phpstan"
+        - "phpunit-code-quality"
+        - "solid"
+        - "symfony-code-quality"
+        - "symfony-phpunit"
+        - "symfony50"
+    paths:
+        - "src"
+        - "tests"
+    exclude_paths:
+        - "src/Kernel.php"
+    autoload_paths:
+        - "bin/.phpunit/phpunit-8.5-0/vendor/autoload.php"
+    symfony_container_xml_path: "var/cache/dev/App_KernelDevDebugContainer.xml"
