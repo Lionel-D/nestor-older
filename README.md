@@ -2,6 +2,10 @@
 
 *Smart groceries shopping list manager*
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/8d5489efd66c4e0cc9ce/maintainability)](https://codeclimate.com/github/Lionel-D/nestor/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8d5489efd66c4e0cc9ce/test_coverage)](https://codeclimate.com/github/Lionel-D/nestor/test_coverage)
+[![Build Status](https://travis-ci.com/Lionel-D/nestor.svg?branch=develop)](https://travis-ci.com/Lionel-D/nestor)
+
 ---
 
 #### Requirements
