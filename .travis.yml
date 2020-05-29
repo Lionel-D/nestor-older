@@ -4,8 +4,8 @@ language: php
 # Language version
 php: 7.2.31
 
-#services:
-#    - mysql
+services:
+    - mysql
 
 # Blocklist
 branches:
