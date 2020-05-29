@@ -31,3 +31,23 @@
 - `symfony server:start` to launch local server.
 
 ---
+
+#### Tests
+
+- create `phpunit.xml` based on `phpunit.xml.dist`
+- add the following to your local `phpunit.xml` file, under `<php>` :
+    - `<env name="BOOTSTRAP_LOCAL_TEST_ENV" value="test"/>` to force execution in test environment.
+- `composer tests` to run the tests.
+
+---
+
+#### Refactoring
+
+**WARNING:** phpunit must be executed at least once before using phpstan or rector in order for them to run correctly.
+(because of phpunit-bridge, if that's not the case there's no autoload for phpunit classes)
+
+- `composer rectordry` to dryrun rector.
+- `composer rector` to run rector and apply changes.
+- `composer phpstan` to run phpstan.
+- `composer ecsdry` to dryrun easy coding standard.
+- `composer ecs` to run easy coding standard and apply fixers.
