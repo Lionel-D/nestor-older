@@ -35,7 +35,7 @@
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
-        "symfony/test-pack": "*",
+        "symfony/test-pack": "^1.0",
         "symplify/easy-coding-standard": "^7.3.18"
     },
     "config": {
@@ -64,6 +64,7 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "tests": "./bin/phpunit",
         "ecs": "vendor/bin/ecs check --fix --ansi",
         "ecsdry": "vendor/bin/ecs check --ansi",
         "rectordry": "vendor/bin/rector process --dry-run --ansi",
