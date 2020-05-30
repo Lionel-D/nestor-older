@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+// -- FONTS -------------------------------------------- //
+@import 'loader/fonts';
+
+// -- VARIABLES ---------------------------------------- //
+@import 'loader/variables';
+
+// -- BOOTSTRAP ---------------------------------------- //
+@import 'loader/bootstrap';
+
+// -- FONT AWESOME ------------------------------------- //
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome';
+// -- Icons styles to load
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/regular';
+//@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands';
+
+// -- STYLES ------------------------------------------- //
+@import 'partials/overall';
