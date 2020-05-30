@@ -35,11 +35,11 @@ install:
     - composer install
     - cp .env.test .env
     - ./bin/phpunit install
-#    - yarn install
+    - yarn install
 
-# Build assets
+# Build assets, link CodeClimate coverage reporter
 before_script:
-#    - yarn encore dev
+    - yarn encore dev
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
     - ./cc-test-reporter before-build
