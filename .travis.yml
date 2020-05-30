@@ -3,6 +3,7 @@ language: php
 
 # Language version
 php: 7.2.31
+node: 10.20.1
 
 services:
     - mysql
