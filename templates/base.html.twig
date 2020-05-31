@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
   <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO meta tags -->
+    <title>Nestor | {% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <link rel="canonical"
+          href="{{ url(app.request.attributes.get("_route"), app.request.attributes.get("_route_params")) }}">
+
+    <!-- CSS stylesheet -->
+    {{ encore_entry_link_tags('app') }}
     {% block stylesheets %}{% endblock %}
+
+    <!-- Favicons, Touch-icons & more -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#ff8f00">
+    <meta name="msapplication-TileColor" content="#ff8f00">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
+    <!--[if IE]>
+        <div class="browser-overlay container-fluid d-flex justify-content-center">
+            <div class="align-self-center text-center">
+                <h4 class="bg-warning p-3 rounded">{{ "Your browser is outdated !"|trans }}</h4>
+                <p>
+                    {% trans %}messages.old-browser.informative-link{% endtrans %}
+                </p>
+            </div>
+        </div>
+    <![endif]-->
+
     {% block body %}{% endblock %}
+
+    <!-- Javascript -->
+    {{ encore_entry_script_tags('app') }}
     {% block javascripts %}{% endblock %}
+
+    <noscript>
+      <div class="browser-overlay container-fluid d-flex justify-content-center">
+        <div class="align-self-center text-center">
+          <h4 class="bg-warning p-3 rounded">{{ "Javascript is disabled !"|trans }}</h4>
+          <p>
+            {% trans %}messages.js-disabled.informative-link{% endtrans %}
+          </p>
+        </div>
+      </div>
+    </noscript>
   </body>
 </html>
+
