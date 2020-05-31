@@ -3,7 +3,6 @@ language: php
 
 # Language version
 php: 7.2.31
-node_js: 10.20.1
 
 services:
     - mysql
@@ -33,6 +32,7 @@ before_install:
 
 # Install project, dependencies & testing suite
 install:
+    - nvm install 10.20.1
     - composer install
     - cp .env.test .env
     - ./bin/phpunit install
