@@ -8,6 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\LogoutException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * @see \App\Tests\Controller\SecurityControllerTest
+ */
 final class SecurityController extends AbstractController
 {
     /**

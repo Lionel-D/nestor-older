@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @IsGranted("ROLE_USER")
+ *
+ * @see \App\Tests\Controller\App\DashboardControllerTest
  */
 final class DashboardController extends AbstractController
 {
@@ -17,6 +19,8 @@ final class DashboardController extends AbstractController
      */
     public function index(): Response
     {
+        $this->getDoctrine();
+
         return $this->render('app/dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
         ]);
