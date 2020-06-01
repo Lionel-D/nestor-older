@@ -3,20 +3,15 @@
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
-  <div class="container">
-    <h1 class="display-4">Hello {{ controller_name }}!</h1>
+  <div class="container text-center pt-5">
+    <h1 class="display-4">This is Nestor</h1>
 
     <p class="lead">
-      This friendly message is coming from:
+      Your groceries shopping assistant
     </p>
 
-    <ul>
-      <li>Your controller at <code><a
-            href="{{ '/Users/lionel/Sites/nestor/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code>
-      </li>
-      <li>Your template at <code><a
-            href="{{ '/Users/lionel/Sites/nestor/templates/homepage/index.html.twig'|file_link(0) }}">templates/homepage/index.html.twig</a></code>
-      </li>
-    </ul>
+    <a href="{{ path('security_login') }}" class="btn btn-lg btn-primary">
+      Sign in <i class="fas fa-sign-in-alt"></i>
+    </a>
   </div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+  <div class="container text-center pt-5">
+    <h1 class="display-4">Welcome {{ app.user.name }}!</h1>
+
+    <p class="lead">
+      This is the app dashboard
+    </p>
+
+    <a href="{{ path('security_logout') }}" class="btn btn-lg btn-primary">
+      Logout <i class="fas fa-sign-out-alt"></i>
+    </a>
+  </div>
+{% endblock %}
