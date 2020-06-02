@@ -8,6 +8,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ *
+ * @see \App\Tests\Entity\UserTest
  */
 class User implements UserInterface
 {
