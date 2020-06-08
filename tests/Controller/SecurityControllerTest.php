@@ -40,6 +40,23 @@ final class SecurityControllerTest extends AppTestCase
         $this->assertSelectorTextContains('h1', 'Welcome Lionel!');
     }
 
+    public function testRegisterSuccessful(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'name' => 'NewUser',
+            'email' => 'new@user.com',
+            'password' => '1newpa$$',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseRedirects('/app/dashboard');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Welcome NewUser!');
+    }
+
     private function successfullyLoadLoginPage(): Crawler
     {
         $crawler = $this->kernelBrowser->request('GET', '/login');
@@ -56,6 +73,34 @@ final class SecurityControllerTest extends AppTestCase
 
         $form['email'] = $email;
         $form['password'] = $password;
+
+        $this->kernelBrowser->submit($form);
+    }
+
+    private function successfullyLoadRegisterPage(): Crawler
+    {
+        $crawler = $this->kernelBrowser->request('GET', '/register');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Please register');
+
+        return $crawler;
+    }
+
+    /**
+     * @param mixed[] $formData
+     */
+    private function fillAndSubmitRegisterForm(Crawler $crawler, array $formData): void
+    {
+        $form = $crawler->selectButton('register_submit')->form();
+
+        $form['registration_form[name]'] = $formData['name'];
+        $form['registration_form[email]'] = $formData['email'];
+        $form['registration_form[plainPassword]'] = $formData['password'];
+
+        if ($formData['terms']) {
+            $form['registration_form[agreeTerms]'] = '1';
+        }
 
         $this->kernelBrowser->submit($form);
     }

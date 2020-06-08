@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+  <div class="container text-center pt-5">
+    <h1 class="display-4 mb-5">Please register</h1>
+
+    {{ form_start(registrationForm) }}
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          {{ form_row(registrationForm.email) }}
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          {{ form_row(registrationForm.name) }}
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          {{ form_row(registrationForm.plainPassword) }}
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+      </div>
+
+      <button type="submit" name="register_submit" class="btn btn-lg btn-primary">
+        Register <i class="fas fa-user-edit"></i>
+      </button>
+    {{ form_end(registrationForm) }}
+  </div>
+{% endblock %}
