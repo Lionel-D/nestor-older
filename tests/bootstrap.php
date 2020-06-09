@@ -1,6 +1,12 @@
 <?php
 
-$commands = ['php "%s/../bin/console" cache:clear --no-warmup'];
+$commands = [
+    'php "%s/../bin/console" cache:clear --no-warmup',
+    'php "%s/../bin/console" doctrine:database:drop --force',
+    'php "%s/../bin/console" doctrine:database:create',
+    'php "%s/../bin/console" doctrine:migrations:migrate --no-interaction',
+    'php "%s/../bin/console" doctrine:fixtures:load --no-interaction',
+];
 
 if (isset($_ENV['BOOTSTRAP_LOCAL_TEST_ENV'])) {
     $localTestEnv = $_ENV['BOOTSTRAP_LOCAL_TEST_ENV'];

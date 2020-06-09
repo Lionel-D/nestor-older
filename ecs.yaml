@@ -2,17 +2,19 @@ parameters:
     services:
         Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer: ~
     sets:
-        - "clean-code"
-        - "common"
-        - "php70"
-        - "php71"
-        - "psr12"
-        - "symfony"
-        - "simplify"
+        - 'clean-code'
+        - 'common'
+        - 'php70'
+        - 'php71'
+        - 'psr12'
+        - 'symfony'
+        - 'simplify'
     skip:
         PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer: ~
     paths:
-        - "src"
-        - "tests"
+        - 'src'
+        - 'tests'
     exclude_files:
         - 'src/Kernel.php'
+        - 'src/Migrations/*'
+        - 'src/DataFixtures/*'

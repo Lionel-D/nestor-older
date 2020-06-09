@@ -1,22 +1,31 @@
 parameters:
     sets:
-        - "celebrity"
-        - "code-quality"
-        - "coding-style"
-        - "dead-code"
-        - "naming"
-        - "php73"
-        - "phpstan"
-        - "phpunit-code-quality"
-        - "solid"
-        - "symfony-code-quality"
-        - "symfony-phpunit"
-        - "symfony50"
+        - 'celebrity'
+        - 'code-quality'
+        - 'coding-style'
+        - 'dead-code'
+        - 'naming'
+        - 'php73'
+        - 'phpstan'
+        - 'phpunit-code-quality'
+        - 'solid'
+        - 'symfony-code-quality'
+        - 'symfony-phpunit'
+        - 'symfony50'
     paths:
-        - "src"
-        - "tests"
+        - 'src'
+        - 'tests'
     exclude_paths:
-        - "src/Kernel.php"
+        - 'src/Kernel.php'
+        - 'src/Migrations/*'
+        - 'src/DataFixtures/*'
+    exclude_rectors:
+        - 'Rector\SOLID\Rector\Class_\RepeatedLiteralToClassConstantRector'
+        - 'Rector\DeadCode\Rector\Class_\RemoveUnusedDoctrineEntityMethodAndPropertyRector'
+        - 'Rector\CodingStyle\Rector\ClassMethod\NewlineBeforeNewAssignSetRector'
+        - 'Rector\SOLID\Rector\ClassMethod\ChangeReadOnlyVariableWithDefaultValueToConstantRector'
+        - 'Rector\CodeQuality\Rector\Class_\CompleteDynamicPropertiesRector'
+        - 'Rector\SymfonyPHPUnit\Rector\Class_\SelfContainerGetMethodCallFromTestToSetUpMethodRector'
     autoload_paths:
-        - "bin/.phpunit/phpunit-8.5-0/vendor/autoload.php"
-    symfony_container_xml_path: "var/cache/dev/App_KernelDevDebugContainer.xml"
+        - 'bin/.phpunit/phpunit-8.5-0/vendor/autoload.php'
+    symfony_container_xml_path: 'var/cache/dev/App_KernelDevDebugContainer.xml'

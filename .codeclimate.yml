@@ -8,3 +8,5 @@ exclude_patterns:
     - "translations/"
     - "var/"
     - "vendor/"
+    - "src/Migrations/"
+    - "src/DataFixtures/"
