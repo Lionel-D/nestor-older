@@ -2,16 +2,15 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\AppTestCase;
 
-final class HomepageControllerTest extends WebTestCase
+final class HomepageControllerTest extends AppTestCase
 {
     public function testIndex(): void
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
+        $this->kernelBrowser->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello HomepageController!');
+        $this->assertSelectorTextContains('h1', 'This is Nestor');
     }
 }

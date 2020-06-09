@@ -13,10 +13,8 @@ final class HomepageController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
-     *
-     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         return $this->render('homepage/index.html.twig', [
             'controller_name' => 'HomepageController',

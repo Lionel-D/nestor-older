@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+  <div class="container text-center pt-5">
+    <h1 class="display-4 mb-5">Please sign in</h1>
+
+    <form method="post">
+      {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
+
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email"
+                   id="inputEmail"
+                   name="email"
+                   value="{{ last_username }}"
+                   class="form-control"
+                   autofocus
+            >
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-5 col-xl-4">
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password"
+                   id="inputPassword"
+                   name="password"
+                   class="form-control"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" id="remember_me" name="_remember_me" class="custom-control-input">
+          <label class="custom-control-label" for="remember_me">Remember me</label>
+        </div>
+      </div>
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+      <button type="submit" name="login_submit" class="btn btn-lg btn-primary">
+        Sign in <i class="fas fa-sign-in-alt"></i>
+      </button>
+    </form>
+  </div>
+{% endblock %}

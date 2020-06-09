@@ -31,6 +31,7 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "phpstan/phpstan": "^0.12.25",
         "rector/rector": "^0.7.26",
         "symfony/debug-pack": "*",
