@@ -16,11 +16,10 @@
           <div class="form-group">
             <label for="inputEmail">Email</label>
             <input type="email"
-                   value="{{ last_username }}"
-                   name="email"
                    id="inputEmail"
+                   name="email"
+                   value="{{ last_username }}"
                    class="form-control"
-                   required
                    autofocus
             >
           </div>
@@ -29,10 +28,9 @@
           <div class="form-group">
             <label for="inputPassword">Password</label>
             <input type="password"
-                   name="password"
                    id="inputPassword"
+                   name="password"
                    class="form-control"
-                   required
             >
           </div>
         </div>
@@ -45,10 +43,7 @@
         </div>
       </div>
 
-      <input type="hidden"
-             name="_csrf_token"
-             value="{{ csrf_token('authenticate') }}"
-      >
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
       <button type="submit" name="login_submit" class="btn btn-lg btn-primary">
         Sign in <i class="fas fa-sign-in-alt"></i>

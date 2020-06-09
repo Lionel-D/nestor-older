@@ -7,11 +7,44 @@ use Symfony\Component\DomCrawler\Crawler;
 
 final class SecurityControllerTest extends AppTestCase
 {
+    public function testLoginFailedWrongPassword(): void
+    {
+        $crawler = $this->successfullyLoadLoginPage();
+
+        $this->fillAndSubmitLoginForm($crawler, 'hello@lionel-d.com', 'wrongpassword');
+
+        $this->assertResponseRedirects('/login');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('.alert-danger', 'Invalid credentials.');
+    }
+
+    public function testLoginFailedNoAccount(): void
+    {
+        $crawler = $this->successfullyLoadLoginPage();
+
+        $this->fillAndSubmitLoginForm($crawler, 'fake@email.com', 'azerty');
+
+        $this->assertResponseRedirects('/login');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('.alert-danger', 'Email could not be found.');
+    }
+
     public function testLoginSuccessful(): void
     {
         $crawler = $this->successfullyLoadLoginPage();
 
         $this->fillAndSubmitLoginForm($crawler, 'hello@lionel-d.com', 'password');
+
+        $this->assertResponseRedirects('/app/dashboard');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('h1', 'Welcome Lionel!');
+    }
+
+    public function testLoginAsAlreadyAuthenticated(): void
+    {
+        $this->assertLoggedAsUser();
+
+        $this->kernelBrowser->request('GET', '/login');
 
         $this->assertResponseRedirects('/app/dashboard');
         $this->kernelBrowser->followRedirect();
@@ -29,23 +62,172 @@ final class SecurityControllerTest extends AppTestCase
         $this->assertSelectorTextContains('h1', 'This is Nestor');
     }
 
-    public function testLoginAsAlreadyAuthenticated(): void
+    public function testRegisterFailedNoEmail(): void
     {
-        $this->assertLoggedAsUser();
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => '',
+            'name' => 'NewUser',
+            'password' => '1newpa$$',
+            'terms' => true,
+        ];
 
-        $this->kernelBrowser->request('GET', '/login');
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
 
-        $this->assertResponseRedirects('/app/dashboard');
-        $this->kernelBrowser->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Welcome Lionel!');
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'You must enter an email');
+    }
+
+    public function testRegisterFailedInvalidEmail(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'Not an email',
+            'name' => 'NewUser',
+            'password' => '1newpa$$',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'This is not a valid email');
+    }
+
+    public function testRegisterFailedEmailAlreadyUsed(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'hello@lionel-d.com',
+            'name' => 'NewUser',
+            'password' => '1newpa$$',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'There is already an account with this email');
+    }
+
+    public function testRegisterFailedNoName(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => '',
+            'password' => '1newpa$$',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'Please choose a name');
+    }
+
+    public function testRegisterFailedNoPassword(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => 'NewUser',
+            'password' => '',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'Please choose a password');
+    }
+
+    public function testRegisterFailedPasswordTooShort(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => 'NewUser',
+            'password' => '1a$',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'Your password should be at least 8 characters long');
+    }
+
+    public function testRegisterFailedPasswordWithoutLetter(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => 'NewUser',
+            'password' => '$1234567',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'Your password must contain at least one letter');
+    }
+
+    public function testRegisterFailedPasswordWithoutDigit(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => 'NewUser',
+            'password' => '$abcdefg',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'Your password must contain at least one digit');
+    }
+
+    public function testRegisterFailedPasswordWithoutSymbol(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => 'NewUser',
+            'password' => '1234567x',
+            'terms' => true,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'Your password must contain at least one symbol');
+    }
+
+    public function testRegisterFailedTermsNotAgreed(): void
+    {
+        $crawler = $this->successfullyLoadRegisterPage();
+        $formData = [
+            'email' => 'new@user.com',
+            'name' => 'NewUser',
+            'password' => '1newpa$$',
+            'terms' => false,
+        ];
+
+        $this->fillAndSubmitRegisterForm($crawler, $formData);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('.form-error-message', 'You should agree to our terms');
     }
 
     public function testRegisterSuccessful(): void
     {
         $crawler = $this->successfullyLoadRegisterPage();
         $formData = [
-            'name' => 'NewUser',
             'email' => 'new@user.com',
+            'name' => 'NewUser',
             'password' => '1newpa$$',
             'terms' => true,
         ];
@@ -94,8 +276,8 @@ final class SecurityControllerTest extends AppTestCase
     {
         $form = $crawler->selectButton('register_submit')->form();
 
-        $form['registration_form[name]'] = $formData['name'];
         $form['registration_form[email]'] = $formData['email'];
+        $form['registration_form[name]'] = $formData['name'];
         $form['registration_form[plainPassword]'] = $formData['password'];
 
         if ($formData['terms']) {
