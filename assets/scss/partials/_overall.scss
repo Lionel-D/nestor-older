@@ -1,1 +1,40 @@
 // -- OVERALL STYLES ----------------------------------- //
+
+html,
+body {
+  height: 100%;
+
+  &.fixed-header {
+    padding-top: 56px;
+  }
+
+  &.fullscreen-bg {
+    @include retina-bg-img('nestor-login-bg', 'jpg', 2560);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+}
+
+.browser-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba($white, .9);
+  width: 100vw;
+  height: 100vh;
+}
+
+[class*='btn-outline-'] {
+  background: $card-cap-bg;
+}
+
+label {
+  .required::after {
+    display: inline-block;
+    margin-left: .125rem;
+    color: $danger;
+    content: '*';
+  }
+}

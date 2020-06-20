@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="wpvdjeR" resname="outdated_browser.title">
+        <source>outdated_browser.title</source>
+        <target>Your browser is outdated!</target>
+      </trans-unit>
+      <trans-unit id=".ooW0hI" resname="outdated_browser.informative_link">
+        <source>outdated_browser.informative_link</source>
+        <target><![CDATA[Please <a href="https://browsehappy.com" target="_blank" rel="noopener">upgrade your browser</a> to improve your browsing experience.]]></target>
+      </trans-unit>
+      <trans-unit id="xA.e0gL" resname="js_disabled.title">
+        <source>js_disabled.title</source>
+        <target>Javascript is disabled!</target>
+      </trans-unit>
+      <trans-unit id="J0sJwAY" resname="js_disabled.informative_link">
+        <source>js_disabled.informative_link</source>
+        <target><![CDATA[Please <a href="https://enable-javascript.com" target="_blank" rel="noopener">enable Javascript</a> to improve your browsing experience.]]></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

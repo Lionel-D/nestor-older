@@ -1,53 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block bodyclass %}fullscreen-bg{% endblock %}
+
+{% block title %}Sign in!{% endblock %}
 
 {% block body %}
-  <div class="container text-center pt-5">
-    <h1 class="display-4 mb-5">Please sign in</h1>
+  <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-center">
+    <a href="{{ path('homepage') }}" class="d-inline-block mb-4">
+      <img src="{{ asset('build/images/nestor-icon.svg') }}" width="80" height="80" class="img-fluid" alt="Nestor logo">
+    </a>
 
-    <form method="post">
-      {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-      {% endif %}
+    <div class="card text-white bg-dark">
+      <h1 class="h3 card-header text-center">{{ 'Please sign in'|trans([],'security') }} :</h1>
 
-      <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5 col-xl-4">
+      <div class="card-body">
+        <form method="post">
+          {% if error %}
+            <div class="d-none form-control is-invalid"></div>
+            <div class="invalid-feedback mb-2">
+              <span class="d-block text-left">
+                  <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Error'|trans({}, 'validators') }}</span> <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+              </span>
+            </div>
+          {% endif %}
+
           <div class="form-group">
-            <label for="inputEmail">Email</label>
-            <input type="email"
-                   id="inputEmail"
-                   name="email"
-                   value="{{ last_username }}"
-                   class="form-control"
-                   autofocus
-            >
+            <label for="inputEmail" class="sr-only">{{ 'Email'|trans([],'security') }}</label>
+            <input type="email" id="inputEmail" name="email" value="{{ last_username }}" class="form-control" placeholder="{{ 'Email'|trans([],'security') }}" autofocus>
           </div>
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
+
           <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password"
-                   id="inputPassword"
-                   name="password"
-                   class="form-control"
-            >
+            <label for="inputPassword" class="sr-only">{{ 'Password'|trans([],'security') }}</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="{{ 'Password'|trans([],'security') }}">
           </div>
-        </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" id="remember_me" name="_remember_me" class="custom-control-input">
+              <label class="custom-control-label" for="remember_me">{{ 'Remember me'|trans([],'security') }}</label>
+            </div>
+          </div>
+
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+          <button type="submit" name="login_submit" class="btn btn-block btn-outline-nestor">
+            {{ 'Sign in'|trans([],'security') }} <i class="fas fa-sign-in-alt"></i>
+          </button>
+        </form>
       </div>
-
-      <div class="form-group">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" id="remember_me" name="_remember_me" class="custom-control-input">
-          <label class="custom-control-label" for="remember_me">Remember me</label>
-        </div>
-      </div>
-
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-      <button type="submit" name="login_submit" class="btn btn-lg btn-primary">
-        Sign in <i class="fas fa-sign-in-alt"></i>
-      </button>
-    </form>
+    </div>
   </div>
 {% endblock %}
