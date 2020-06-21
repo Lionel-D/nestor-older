@@ -13,6 +13,6 @@ final class DashboardControllerTest extends AppTestCase
         $this->kernelBrowser->request('GET', '/app/dashboard');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Welcome Lionel!');
+        $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
 }

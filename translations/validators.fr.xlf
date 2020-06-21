@@ -397,6 +397,46 @@
         <source>The CSRF token is invalid. Please try to resubmit the form.</source>
         <target>Le jeton CSRF est invalide. Veuillez renvoyer le formulaire.</target>
       </trans-unit>
+      <trans-unit id="EGL4usn" resname="empty_email">
+        <source>empty_email</source>
+        <target>Vous devez indiquer un email</target>
+      </trans-unit>
+      <trans-unit id="wc87S7a" resname="empty_name">
+        <source>empty_name</source>
+        <target>Merci de choisir un nom</target>
+      </trans-unit>
+      <trans-unit id="_nfn1My" resname="empty_password">
+        <source>empty_password</source>
+        <target>Merci de choisir un mot de passe</target>
+      </trans-unit>
+      <trans-unit id="Jj0bZf3" resname="terms_not_checked">
+        <source>terms_not_checked</source>
+        <target>Vous devez accepter nos conditions</target>
+      </trans-unit>
+      <trans-unit id="TfEafd5" resname="invalid_email">
+        <source>invalid_email</source>
+        <target>Cet email n'est pas valide</target>
+      </trans-unit>
+      <trans-unit id="Z9hTU7A" resname="already_used_email">
+        <source>already_used_email</source>
+        <target>Il y a déjà un compte avec cet email</target>
+      </trans-unit>
+      <trans-unit id=".IbxVtd" resname="too_short_password">
+        <source>too_short_password</source>
+        <target>Votre mot de passe doit contenir au moins 8 caractères</target>
+      </trans-unit>
+      <trans-unit id="PZ9X102" resname="no_letter_password">
+        <source>no_letter_password</source>
+        <target>Votre mot de passe doit contenir au moins une lettre</target>
+      </trans-unit>
+      <trans-unit id="3A19vwi" resname="no_digit_password">
+        <source>no_digit_password</source>
+        <target>Votre mot de passe doit contenir au moins un chiffre</target>
+      </trans-unit>
+      <trans-unit id="6xpQQDQ" resname="no_symbol_password">
+        <source>no_symbol_password</source>
+        <target>Votre mot de passe doit contenir au moins un symbole</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

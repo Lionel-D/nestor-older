@@ -21,6 +21,14 @@
         <source>js_disabled.informative_link</source>
         <target><![CDATA[Merci d'<a href="https://enable-javascript.com/">activer Javascript</a> pour améliorer votre experience de navigation.]]></target>
       </trans-unit>
+      <trans-unit id="0sFgfxi" resname="dashboard_title">
+        <source>dashboard_title</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="Z.yIrEX" resname="homepage_title">
+        <source>homepage_title</source>
+        <target>Accueil</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

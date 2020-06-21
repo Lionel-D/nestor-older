@@ -73,6 +73,54 @@
         <source>login_link</source>
         <target>Sign in</target>
       </trans-unit>
+      <trans-unit id="Ht0MFMT" resname="login_title">
+        <source>login_title</source>
+        <target>Please sign in</target>
+      </trans-unit>
+      <trans-unit id="n1tXOaO" resname="email_label">
+        <source>email_label</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="HDBrE_m" resname="password_label">
+        <source>password_label</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="e6sSUQ3" resname="remember_me_label">
+        <source>remember_me_label</source>
+        <target>Remember me</target>
+      </trans-unit>
+      <trans-unit id="0xSwaIv" resname="Email could not be found.">
+        <source>Email could not be found.</source>
+        <target>Email could not be found.</target>
+      </trans-unit>
+      <trans-unit id="LcIQDRe" resname="register_title">
+        <source>register_title</source>
+        <target>Please register</target>
+      </trans-unit>
+      <trans-unit id="s4PV8cG" resname="name_label">
+        <source>name_label</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="VXapUNi" resname="name_help">
+        <source>name_help</source>
+        <target>Just to greet you, doesn't have to be real ;-)</target>
+      </trans-unit>
+      <trans-unit id="9ON6SPX" resname="email_help">
+        <source>email_help</source>
+        <target>A validation email will be sent to this address</target>
+      </trans-unit>
+      <trans-unit id="c47iHR7" resname="password_help">
+        <source>password_help</source>
+        <target><![CDATA[At least 8 characters with letters, digits & symbols]]></target>
+      </trans-unit>
+      <trans-unit id="Z7vgfHs" resname="agree_terms_label">
+        <source>agree_terms_label</source>
+        <target>Agree terms</target>
+      </trans-unit>
+      <trans-unit id="fq4Gem_" resname="logout_link">
+        <source>logout_link</source>
+        <target>Logout</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

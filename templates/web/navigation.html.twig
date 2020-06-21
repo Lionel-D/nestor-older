@@ -1,0 +1,12 @@
+{% extends 'includes/header.html.twig' %}
+
+{% block header_nav %}{% endblock %}
+
+{% block header_buttons %}
+  <a href="{{ path('security_register') }}" class="btn btn-sm btn-outline-secondary mr-2">
+    {{ 'register_link'|trans({},'security') }} <i class="fas fa-user-edit"></i>
+  </a>
+  <a href="{{ path('security_login') }}" class="btn btn-sm btn-outline-nestor">
+    {{ 'login_link'|trans({},'security') }} <i class="fas fa-sign-in-alt"></i>
+  </a>
+{% endblock %}

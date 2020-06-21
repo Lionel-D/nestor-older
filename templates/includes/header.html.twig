@@ -11,10 +11,10 @@
     <div id="main-nav" class="collapse navbar-collapse justify-content-end text-right">
       <ul class="navbar-nav mr-md-3">
         {# Here goes the site navigation links #}
+        {% block header_nav %}{% endblock %}
       </ul>
       <hr class="d-md-none">
-      <a href="{{ path('security_register') }}" class="btn btn-sm btn-outline-secondary mr-2">{{ 'register_link'|trans({},'security') }} <i class="fas fa-user-edit"></i></a>
-      <a href="{{ path('security_login') }}" class="btn btn-sm btn-outline-nestor">{{ 'login_link'|trans({},'security') }} <i class="fas fa-sign-in-alt"></i></a>
+      {% block header_buttons %}{% endblock %}
     </div>
   </nav>
 </header>

@@ -2,7 +2,7 @@
 
 {% block bodyclass %}fullscreen-bg{% endblock %}
 
-{% block title %}Sign in!{% endblock %}
+{% block title %}{{ 'login_title'|trans([],'security') }}{% endblock %}
 
 {% block body %}
   <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-center">
@@ -11,7 +11,7 @@
     </a>
 
     <div class="card text-white bg-dark">
-      <h1 class="h3 card-header text-center">{{ 'Please sign in'|trans([],'security') }} :</h1>
+      <h1 class="h3 card-header text-center">{{ 'login_title'|trans([],'security') }} :</h1>
 
       <div class="card-body">
         <form method="post">
@@ -25,26 +25,26 @@
           {% endif %}
 
           <div class="form-group">
-            <label for="inputEmail" class="sr-only">{{ 'Email'|trans([],'security') }}</label>
-            <input type="email" id="inputEmail" name="email" value="{{ last_username }}" class="form-control" placeholder="{{ 'Email'|trans([],'security') }}" autofocus>
+            <label for="inputEmail" class="sr-only">{{ 'email_label'|trans([],'security') }}</label>
+            <input type="email" id="inputEmail" name="email" value="{{ last_username }}" class="form-control" placeholder="{{ 'email_label'|trans([],'security') }}" autofocus>
           </div>
 
           <div class="form-group">
-            <label for="inputPassword" class="sr-only">{{ 'Password'|trans([],'security') }}</label>
-            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="{{ 'Password'|trans([],'security') }}">
+            <label for="inputPassword" class="sr-only">{{ 'password_label'|trans([],'security') }}</label>
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="{{ 'password_label'|trans([],'security') }}">
           </div>
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" id="remember_me" name="_remember_me" class="custom-control-input">
-              <label class="custom-control-label" for="remember_me">{{ 'Remember me'|trans([],'security') }}</label>
+              <label class="custom-control-label" for="remember_me">{{ 'remember_me_label'|trans([],'security') }}</label>
             </div>
           </div>
 
           <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
           <button type="submit" name="login_submit" class="btn btn-block btn-outline-nestor">
-            {{ 'Sign in'|trans([],'security') }} <i class="fas fa-sign-in-alt"></i>
+            {{ 'login_link'|trans({},'security') }} <i class="fas fa-sign-in-alt"></i>
           </button>
         </form>
       </div>

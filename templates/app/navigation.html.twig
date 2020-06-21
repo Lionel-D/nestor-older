@@ -1,0 +1,9 @@
+{% extends 'includes/header.html.twig' %}
+
+{% block header_nav %}{% endblock %}
+
+{% block header_buttons %}
+  <a href="{{ path('security_logout') }}" class="btn btn-sm btn-outline-nestor">
+    {{ 'logout_link'|trans({},'security') }} <i class="fas fa-sign-out-alt"></i>
+  </a>
+{% endblock %}

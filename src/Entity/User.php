@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  *
  * @see \App\Tests\Entity\UserTest
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="already_used_email")
  */
 class User implements UserInterface
 {
@@ -27,8 +27,8 @@ class User implements UserInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message="You must enter an email")
-     * @Assert\Email(message="This is not a valid email")
+     * @Assert\NotBlank(message="empty_email")
+     * @Assert\Email(message="invalid_email")
      */
     private $email;
 
@@ -47,7 +47,7 @@ class User implements UserInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Please choose a name")
+     * @Assert\NotBlank(message="empty_name")
      */
     private $name;
 

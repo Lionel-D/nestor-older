@@ -397,6 +397,46 @@
         <source>The CSRF token is invalid. Please try to resubmit the form.</source>
         <target>The CSRF token is invalid. Please try to resubmit the form.</target>
       </trans-unit>
+      <trans-unit id="EGL4usn" resname="empty_email">
+        <source>empty_email</source>
+        <target>You must enter an email</target>
+      </trans-unit>
+      <trans-unit id="wc87S7a" resname="empty_name">
+        <source>empty_name</source>
+        <target>Please choose a name</target>
+      </trans-unit>
+      <trans-unit id="_nfn1My" resname="empty_password">
+        <source>empty_password</source>
+        <target>Please choose a password</target>
+      </trans-unit>
+      <trans-unit id="Jj0bZf3" resname="terms_not_checked">
+        <source>terms_not_checked</source>
+        <target>You should agree to our terms</target>
+      </trans-unit>
+      <trans-unit id="TfEafd5" resname="invalid_email">
+        <source>invalid_email</source>
+        <target>This is not a valid email</target>
+      </trans-unit>
+      <trans-unit id="Z9hTU7A" resname="already_used_email">
+        <source>already_used_email</source>
+        <target>There is already an account with this email</target>
+      </trans-unit>
+      <trans-unit id=".IbxVtd" resname="too_short_password">
+        <source>too_short_password</source>
+        <target>Your password should be at least 8 characters long</target>
+      </trans-unit>
+      <trans-unit id="PZ9X102" resname="no_letter_password">
+        <source>no_letter_password</source>
+        <target>Your password must contain at least one letter</target>
+      </trans-unit>
+      <trans-unit id="3A19vwi" resname="no_digit_password">
+        <source>no_digit_password</source>
+        <target>Your password must contain at least one digit</target>
+      </trans-unit>
+      <trans-unit id="6xpQQDQ" resname="no_symbol_password">
+        <source>no_symbol_password</source>
+        <target>Your password must contain at least one symbol</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
