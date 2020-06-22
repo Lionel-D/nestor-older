@@ -8,7 +8,7 @@
 
 ---
 
-#### Requirements
+### Requirements
 
 - **[PHP](https://www.php.net/)** `7.2.5 or greater`
 - **[MySQL](https://www.mysql.com/)** `8.0.19 or greater`
@@ -18,7 +18,7 @@
 
 ---
 
-#### Installation
+### Installation
 
 - create `.env.local` based on `.env` and set values for your local environment.
 - `composer install` to get the framework dependencies.
@@ -29,14 +29,14 @@
 
 ---
 
-#### Local environment
+### Local environment
 
 - `yarn encore dev --watch` to launch webpack.
 - `symfony server:start` to launch local server.
 
 ---
 
-#### Tests
+### Tests
 
 - create `phpunit.xml` based on `phpunit.xml.dist`
 - add the following to your local `phpunit.xml` file, under `<php>` :
@@ -45,7 +45,7 @@
 
 ---
 
-#### Refactoring
+### Refactoring
 
 **WARNING:** phpunit must be executed at least once before using phpstan or rector in order for them to run correctly.
 (because of phpunit-bridge, if that's not the case there's no autoload for phpunit classes)

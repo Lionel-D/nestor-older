@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="wpvdjeR" resname="outdated_browser.title">
+        <source>outdated_browser.title</source>
+        <target>Votre navigateur est obsolète!</target>
+      </trans-unit>
+      <trans-unit id=".ooW0hI" resname="outdated_browser.informative_link">
+        <source>outdated_browser.informative_link</source>
+        <target><![CDATA[Merci de <a href="https://browsehappy.com/">mettre à jour votre navigateur</a> pour améliorer votre experience de navigation.]]></target>
+      </trans-unit>
+      <trans-unit id="xA.e0gL" resname="js_disabled.title">
+        <source>js_disabled.title</source>
+        <target>Javascript est desactivé!</target>
+      </trans-unit>
+      <trans-unit id="J0sJwAY" resname="js_disabled.informative_link">
+        <source>js_disabled.informative_link</source>
+        <target><![CDATA[Merci d'<a href="https://enable-javascript.com/">activer Javascript</a> pour améliorer votre experience de navigation.]]></target>
+      </trans-unit>
+      <trans-unit id="0sFgfxi" resname="dashboard_title">
+        <source>dashboard_title</source>
+        <target>Tableau de bord</target>
+      </trans-unit>
+      <trans-unit id="Z.yIrEX" resname="homepage_title">
+        <source>homepage_title</source>
+        <target>Accueil</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,34 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block bodyclass %}fullscreen-bg{% endblock %}
+
+{% block title %}{{ 'register_title'|trans([],'security') }}{% endblock %}
 
 {% block body %}
-  <div class="container text-center pt-5">
-    <h1 class="display-4 mb-5">Please register</h1>
+  <div class="container h-100 d-flex flex-column justify-content-center align-items-center text-center">
+    <a href="{{ path('homepage') }}" class="d-inline-block mb-4">
+      <img src="{{ asset('build/images/nestor-icon.svg') }}" width="80" height="80" class="img-fluid" alt="Nestor logo">
+    </a>
 
-    {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
-      <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-          {{ form_row(registrationForm.email) }}
-        </div>
-        <div class="col-md-6 col-lg-5 col-xl-4">
-          {{ form_row(registrationForm.name) }}
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5 col-xl-4">
-          {{ form_row(registrationForm.plainPassword) }}
-        </div>
-      </div>
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-5 col-xl-4">
+    <div class="card text-white bg-dark">
+      <h1 class="h3 card-header text-center">{{ 'register_title'|trans([],'security') }} :</h1>
+
+      <div class="card-body">
+        {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(registrationForm.name, {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_row(registrationForm.email, {'label_attr': {'class': 'sr-only'}}) }}
+        {{ form_row(registrationForm.plainPassword, {'label_attr': {'class': 'sr-only'}}) }}
         {{ form_row(registrationForm.agreeTerms) }}
+
+        <button type="submit" name="register_submit" class="btn btn-block btn-outline-nestor">
+          {{ 'register_link'|trans({},'security') }} <i class="fas fa-user-edit"></i>
+        </button>
+        {{ form_end(registrationForm) }}
       </div>
     </div>
-
-      <button type="submit" name="register_submit" class="btn btn-lg btn-primary">
-        Register <i class="fas fa-user-edit"></i>
-      </button>
-    {{ form_end(registrationForm) }}
   </div>
 {% endblock %}

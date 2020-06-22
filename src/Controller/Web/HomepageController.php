@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @see \App\Tests\Controller\HomepageControllerTest
+ * @see \App\Tests\Controller\Web\HomepageControllerTest
  */
 final class HomepageController extends AbstractController
 {
@@ -16,7 +16,7 @@ final class HomepageController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('homepage/index.html.twig', [
+        return $this->render('web/homepage/index.html.twig', [
             'controller_name' => 'HomepageController',
         ]);
     }

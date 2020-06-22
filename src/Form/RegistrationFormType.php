@@ -26,25 +26,25 @@ final class RegistrationFormType extends AbstractType
     {
         $this->passwordConstraints = [
             new NotBlank([
-                'message' => 'Please choose a password',
+                'message' => 'empty_password',
             ]),
             new Length([
                 'min' => 8,
-                'minMessage' => 'Your password should be at least {{ limit }} characters long',
+                'minMessage' => 'too_short_password',
                 // max length allowed by Symfony for security reasons
                 'max' => 4096,
             ]),
             new Regex([
                 'pattern' => '/[a-zA-Z]+/',
-                'message' => 'Your password must contain at least one letter',
+                'message' => 'no_letter_password',
             ]),
             new Regex([
                 'pattern' => '/\d+/',
-                'message' => 'Your password must contain at least one digit',
+                'message' => 'no_digit_password',
             ]),
             new Regex([
                 'pattern' => '/(\W|_)+/',
-                'message' => 'Your password must contain at least one symbol',
+                'message' => 'no_symbol_password',
             ]),
         ];
     }
@@ -57,24 +57,27 @@ final class RegistrationFormType extends AbstractType
     {
         $formBuilder
             ->add('email', EmailType::class, [
-                'help' => 'A confirmation message will be sent to this address',
+                'label' => 'email_label',
+                'help' => 'email_help',
+                'translation_domain' => 'security',
             ])
             ->add('name', TextType::class, [
-                'help' => "Just to greet you, doesn't have to be real ;-)",
+                'label' => 'name_label',
+                'help' => 'name_help',
+                'translation_domain' => 'security',
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
-                'label' => 'Password',
-                'help' => 'At least 8 characters with letters, digits & symbols',
+                'label' => 'password_label',
+                'help' => 'password_help',
                 'constraints' => $this->passwordConstraints,
+                'translation_domain' => 'security',
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms',
-                    ]),
-                ],
+                'label' => 'agree_terms_label',
+                'constraints' => [new IsTrue(['message' => 'terms_not_checked'])],
+                'translation_domain' => 'security',
             ])
         ;
     }

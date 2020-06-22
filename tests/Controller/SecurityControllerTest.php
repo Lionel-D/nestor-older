@@ -15,7 +15,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->assertResponseRedirects('/login');
         $this->kernelBrowser->followRedirect();
-        $this->assertSelectorTextContains('.alert-danger', 'Invalid credentials.');
+        $this->assertSelectorTextContains('.form-error-message', 'Invalid credentials.');
     }
 
     public function testLoginFailedNoAccount(): void
@@ -26,7 +26,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->assertResponseRedirects('/login');
         $this->kernelBrowser->followRedirect();
-        $this->assertSelectorTextContains('.alert-danger', 'Email could not be found.');
+        $this->assertSelectorTextContains('.form-error-message', 'Email could not be found.');
     }
 
     public function testLoginSuccessful(): void
@@ -37,7 +37,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->assertResponseRedirects('/app/dashboard');
         $this->kernelBrowser->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Welcome Lionel!');
+        $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
 
     public function testLoginAsAlreadyAuthenticated(): void
@@ -48,7 +48,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->assertResponseRedirects('/app/dashboard');
         $this->kernelBrowser->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Welcome Lionel!');
+        $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
 
     public function testLogout(): void
@@ -236,7 +236,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->assertResponseRedirects('/app/dashboard');
         $this->kernelBrowser->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Welcome NewUser!');
+        $this->assertSelectorTextContains('h1', 'Welcome NewUser');
     }
 
     private function successfullyLoadLoginPage(): Crawler
