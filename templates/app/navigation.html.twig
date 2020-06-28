@@ -1,6 +1,12 @@
 {% extends 'includes/header.html.twig' %}
 
-{% block header_nav %}{% endblock %}
+{% block header_nav %}
+  <li class="nav-item">
+    <a href="{{ path('app_section') }}" class="nav-link">
+      {{ 'section_menu'|trans }}
+    </a>
+  </li>
+{% endblock %}
 
 {% block header_buttons %}
   <a href="{{ path('security_logout') }}" class="btn btn-sm btn-outline-nestor">
