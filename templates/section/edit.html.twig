@@ -1,0 +1,13 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}{{ 'section_edit_title'|trans }}{% endblock %}
+
+{% block main %}
+<div class="container pt-5">
+  <h1 class="display-4 $sectionList">{{ 'section_edit_title'|trans }}</h1>
+
+  <hr>
+
+  {{ include('section/includes/_form.html.twig', {'button_label': 'Update'}) }}
+</div>
+{% endblock %}

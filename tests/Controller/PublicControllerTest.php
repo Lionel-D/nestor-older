@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Controller\Web;
+namespace App\Tests\Controller;
 
 use App\Tests\AppTestCase;
 
-final class HomepageControllerTest extends AppTestCase
+final class PublicControllerTest extends AppTestCase
 {
     public function testIndex(): void
     {

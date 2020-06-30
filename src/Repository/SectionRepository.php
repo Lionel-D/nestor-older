@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\App;
+namespace App\Repository;
 
-use App\Entity\App\Section;
+use App\Entity\Section;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -12,10 +12,10 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Section[]    findAll()
  * @method Section[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SectionRepository extends ServiceEntityRepository
+final class SectionRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        parent::__construct($registry, Section::class);
+        parent::__construct($managerRegistry, Section::class);
     }
 }

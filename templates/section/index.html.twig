@@ -1,0 +1,44 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block title %}{{ 'section_list_title'|trans }}{% endblock %}
+
+{% block main %}
+  <div class="container pt-5">
+    <h1 class="display-4 $sectionList">{{ 'section_list_title'|trans }}</h1>
+
+    <div class="table-responsive">
+      <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">
+              {{ 'section_name'|trans }}<br>
+              <small class="text-muted">{{ 'section_description'|trans }}</small>
+            </th>
+            <th scope="col" class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for section in sections %}
+            <tr>
+              <td>
+                {{ section.name }}<br>
+                <small class="text-muted">{{ section.description }}</small>
+              </td>
+              <td class="text-right">
+                <a href="{{ path('app_section_show', {'id': section.id}) }}" class="btn btn-sm btn-success">Show</a>
+                <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-sm btn-nestor">Edit</a>
+                {{ include('section/includes/_delete_form.html.twig') }}
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2">{{ 'global_noresult'|trans }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <a href="{{ path('app_section_new') }}" class="btn btn-nestor">Create new</a>
+  </div>
+{% endblock %}

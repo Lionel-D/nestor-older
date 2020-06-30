@@ -38,3 +38,19 @@ label {
     content: '*';
   }
 }
+
+.table {
+  thead th {
+    vertical-align: middle;
+  }
+
+  th, td {
+    vertical-align: middle;
+  }
+}
+
+.table-sm {
+  th, td {
+    line-height: 1.2;
+  }
+}

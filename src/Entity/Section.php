@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\App;
+namespace App\Entity;
 
 use App\Repository\SectionRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Section
 {
     /**
+     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -18,11 +19,13 @@ class Section
     private $id;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;

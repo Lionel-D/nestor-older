@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+  <a href="{{ path('app_section_index') }}" class="btn btn-secondary">back to list</a>
+    <button class="btn btn-nestor">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

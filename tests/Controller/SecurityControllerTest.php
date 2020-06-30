@@ -35,7 +35,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->fillAndSubmitLoginForm($crawler, 'hello@lionel-d.com', 'password');
 
-        $this->assertResponseRedirects('/app/dashboard');
+        $this->assertResponseRedirects('/app/');
         $this->kernelBrowser->followRedirect();
         $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
@@ -46,7 +46,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->kernelBrowser->request('GET', '/login');
 
-        $this->assertResponseRedirects('/app/dashboard');
+        $this->assertResponseRedirects('/app/');
         $this->kernelBrowser->followRedirect();
         $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
@@ -234,7 +234,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->fillAndSubmitRegisterForm($crawler, $formData);
 
-        $this->assertResponseRedirects('/app/dashboard');
+        $this->assertResponseRedirects('/app/');
         $this->kernelBrowser->followRedirect();
         $this->assertSelectorTextContains('h1', 'Welcome NewUser');
     }
