@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\App;
 
 use App\Repository\SectionRepository;
 use Doctrine\ORM\Mapping as ORM;

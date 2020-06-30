@@ -2,8 +2,8 @@
 
 namespace App\Service\App;
 
-use App\Entity\Section;
-use App\Repository\SectionRepository;
+use App\Entity\App\Section;
+use App\Repository\App\SectionRepository;
 
 class SectionService
 {
