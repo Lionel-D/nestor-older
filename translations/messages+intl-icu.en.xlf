@@ -29,6 +29,10 @@
         <source>homepage_title</source>
         <target>Homepage</target>
       </trans-unit>
+       <trans-unit id="image_help" resname="image_help">
+        <source>image_help</source>
+        <target>To add an image or change the current one, select a file from the field above. To remove the existing image, click the remove button on the preview.</target>
+       </trans-unit>
     </body>
   </file>
 </xliff>

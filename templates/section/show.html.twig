@@ -1,25 +1,45 @@
 {% extends 'layouts/app.html.twig' %}
 
+{% set delete_modal_id = 'delete_section_' ~ section.id ~ '_modal' %}
+
 {% block title %}{{ 'section_show_title'|trans }}{% endblock %}
 
+{% block heading %}
+  <h1 class="display-4 $sectionList">{{ 'section_show_title'|trans }}</h1>
+  <hr>
+{% endblock %}
+
 {% block main %}
-  <div class="container pt-5">
-    <h1 class="display-4 $sectionList">{{ 'section_show_title'|trans }}</h1>
+  <div class="row">
+    <div class="col-lg-3 d-flex justify-content-center align-items-start mb-3">
+      <div class="img-thumbnail">
+        {% if section.imageFilename is not null %}
+          <img src="{{ asset('uploads/section/' ~ section.imageFilename) }}" class="img-fluid" alt="">
+        {% else %}
+          <img src="{{ asset('build/images/section-default-thumbnail.jpg') }}" srcset="{{ asset('build/images/section-default-thumbnail.jpg') }} 1x, {{ asset('build/images/section-default-thumbnail@2x.jpg') }} 2x" class="img-fluid" alt="">
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <dl class="row">
+        <dt class="col-md-6 col-lg-3 text-md-right">{{ 'section_name'|trans }} :</dt>
+        <dd class="col-md-6 col-lg-9">{{ section.name }}</dd>
 
-    <hr>
-
-    <dl class="row">
-      <dt class="col-md-4 text-right">{{ 'section_name'|trans }} :</dt>
-      <dd class="col-md-8">{{ section.name }}</dd>
-
-      <dt class="col-md-4 text-right">{{ 'section_description'|trans }} :</dt>
-      <dd class="col-md-8">{{ section.description }}</dd>
-    </dl>
-
-    <hr>
-
-    <a href="{{ path('app_section_index') }}" class="btn btn-sm btn-secondary">back to list</a>
-    <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-sm btn-nestor">edit</a>
-    {{ include('section/includes/_delete_form.html.twig') }}
+        <dt class="col-md-6 col-lg-3 text-md-right">{{ 'section_description'|trans }} :</dt>
+        <dd class="col-md-6 col-lg-9">{{ section.description }}</dd>
+      </dl>
+    </div>
   </div>
+
+  <hr>
+
+  <a href="{{ path('app_section_index') }}" class="btn btn-sm btn-secondary">back to list</a>
+  <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-sm btn-nestor">edit</a>
+  <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#{{- delete_modal_id -}}">
+    Delete
+  </button>
+{% endblock %}
+
+{% block modals %}
+  {{ include('section/includes/_delete_modal.html.twig', {'modal_id': delete_modal_id}) }}
 {% endblock %}

@@ -1,13 +1,18 @@
 {% extends 'layouts/app.html.twig' %}
 
+{% set delete_img_modal_id = 'delete_section_img_' ~ section.id ~ '_modal' %}
+
 {% block title %}{{ 'section_edit_title'|trans }}{% endblock %}
 
-{% block main %}
-<div class="container pt-5">
+{% block heading %}
   <h1 class="display-4 $sectionList">{{ 'section_edit_title'|trans }}</h1>
-
   <hr>
+{% endblock %}
 
+{% block main %}
   {{ include('section/includes/_form.html.twig', {'button_label': 'Update'}) }}
-</div>
+{% endblock %}
+
+{% block modals %}
+  {{ include('section/includes/_delete_img_modal.html.twig', {'modal_id': delete_img_modal_id}) }}
 {% endblock %}

@@ -2,43 +2,61 @@
 
 {% block title %}{{ 'section_list_title'|trans }}{% endblock %}
 
+{% block heading %}
+  <h1 class="display-4 $sectionList">{{ 'section_list_title'|trans }}</h1>
+{% endblock %}
+
 {% block main %}
-  <div class="container pt-5">
-    <h1 class="display-4 $sectionList">{{ 'section_list_title'|trans }}</h1>
-
-    <div class="table-responsive">
-      <table class="table table-sm">
-        <thead class="thead-dark">
+  <div class="table-responsive">
+    <table class="table table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">
+            {{ 'section_name'|trans }}<br>
+            <small class="text-muted">{{ 'section_description'|trans }}</small>
+          </th>
+          <th scope="col" class="text-right"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for section in sections %}
+          {% set delete_modal_id = 'delete_section_' ~ section.id ~ '_modal' %}
           <tr>
-            <th scope="col">
-              {{ 'section_name'|trans }}<br>
-              <small class="text-muted">{{ 'section_description'|trans }}</small>
-            </th>
-            <th scope="col" class="text-right"></th>
+            <td class="td-thumbnail">
+              {% if section.imageFilename is not null %}
+                <img src="{{ asset('uploads/section/' ~ section.imageFilename) }}" class="img-fluid rounded" alt="">
+              {% else %}
+                <img src="{{ asset('build/images/section-default-thumbnail.jpg') }}" srcset="{{ asset('build/images/section-default-thumbnail.jpg') }} 1x, {{ asset('build/images/section-default-thumbnail@2x.jpg') }} 2x" class="img-fluid rounded" alt="">
+              {% endif %}
+            </td>
+            <td>
+              {{ section.name }}<br>
+              <small class="text-muted">{{ section.description }}</small>
+            </td>
+            <td class="text-right">
+              <a href="{{ path('app_section_show', {'id': section.id}) }}" class="btn btn-sm btn-success">Show</a>
+              <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-sm btn-nestor">Edit</a>
+              <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#{{- delete_modal_id -}}">
+                Delete
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          {% for section in sections %}
-            <tr>
-              <td>
-                {{ section.name }}<br>
-                <small class="text-muted">{{ section.description }}</small>
-              </td>
-              <td class="text-right">
-                <a href="{{ path('app_section_show', {'id': section.id}) }}" class="btn btn-sm btn-success">Show</a>
-                <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-sm btn-nestor">Edit</a>
-                {{ include('section/includes/_delete_form.html.twig') }}
-              </td>
-            </tr>
-          {% else %}
-            <tr>
-              <td colspan="2">{{ 'global_noresult'|trans }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <a href="{{ path('app_section_new') }}" class="btn btn-nestor">Create new</a>
+        {% else %}
+          <tr>
+            <td colspan="2">{{ 'global_noresult'|trans }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+
+  <a href="{{ path('app_section_new') }}" class="btn btn-nestor">Create new</a>
+{% endblock %}
+
+{% block modals %}
+  {% for section in sections %}
+    {% set delete_modal_id = 'delete_section_' ~ section.id ~ '_modal' %}
+    {{ include('section/includes/_delete_modal.html.twig', {'modal_id': delete_modal_id}) }}
+  {% endfor %}
 {% endblock %}

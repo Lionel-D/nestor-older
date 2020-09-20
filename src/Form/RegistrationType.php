@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
-final class RegistrationFormType extends AbstractType
+final class RegistrationType extends AbstractType
 {
     /**
      * @var mixed[]

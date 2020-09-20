@@ -30,6 +30,12 @@ class Section
      */
     private $description;
 
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageFilename;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,6 +61,18 @@ class Section
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }

@@ -2,12 +2,13 @@
 
 {% block title %}{{ 'dashboard_title'|trans }}{% endblock %}
 
-{% block main %}
-  <div class="container text-center pt-5">
-    <h1 class="display-4">_Welcome {{ app.user.name }}_</h1>
+{% block heading %}
+  <h1 class="display-4">_Welcome {{ app.user.name }}_</h1>
+  <hr>
+{% endblock %}
 
-    <p class="lead">
-      _This is the app dashboard_
-    </p>
-  </div>
+{% block main %}
+  <p class="lead">
+    _This is the app dashboard_
+  </p>
 {% endblock %}

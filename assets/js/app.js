@@ -13,7 +13,8 @@ require('../scss/app.scss');
 const $ = require('jquery');
 require('popper.js');
 require('bootstrap');
+require('bs-custom-file-input');
 // create global $ variable
 global.$ = $;
 // -- Additional JS files
-//require('./subfolder/some_file');
+require('./partials/forms');

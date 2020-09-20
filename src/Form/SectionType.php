@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Section;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 final class SectionType extends AbstractType
 {
@@ -18,6 +20,16 @@ final class SectionType extends AbstractType
         $formBuilder
             ->add('name')
             ->add('description')
+            ->add('image', FileType::class, [
+                'help' => 'image_help',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '1024k',
+                    ])
+                ],
+            ])
         ;
     }
 

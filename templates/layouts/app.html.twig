@@ -4,5 +4,10 @@
 
 {% block body %}
   {{ include('navigations/app_main.html.twig') }}
-  {% block main %}{% endblock %}
+  <div class="container pt-4">
+    {% block heading %}{% endblock %}
+    {{ include('globals/flash_messages.html.twig') }}
+    {% block main %}{% endblock %}
+  </div>
+  {% block modals %}{% endblock %}
 {% endblock %}

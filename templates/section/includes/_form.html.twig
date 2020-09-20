@@ -1,5 +1,23 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+{{ form_start(form, {'attr': {'id': 'section_form'}}) }}
+  <div class="row">
+    <div class="col-lg-3 d-flex justify-content-center align-items-start mb-3">
+      <div class="img-thumbnail">
+        {% if section.imageFilename is not null %}
+          <button type="button" class="btn btn-sm btn-danger btn-img-remove" data-toggle="modal" data-target="#{{- delete_img_modal_id -}}">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <img src="{{ asset('uploads/section/' ~ section.imageFilename) }}" class="img-fluid" alt="">
+        {% else %}
+          <img src="{{ asset('build/images/section-default-thumbnail.jpg') }}" srcset="{{ asset('build/images/section-default-thumbnail.jpg') }} 1x, {{ asset('build/images/section-default-thumbnail@2x.jpg') }} 2x" class="img-fluid" alt="">
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-9 mb-3">
+      {{ form_row(form.name, {'label_attr': {'class': 'sr-only'}}) }}
+      {{ form_row(form.description, {'label_attr': {'class': 'sr-only'}}) }}
+      {{ form_row(form.image, {'label_attr': {'class': 'custom-file-label'}}) }}
+    </div>
+  </div>
   <a href="{{ path('app_section_index') }}" class="btn btn-secondary">back to list</a>
-    <button class="btn btn-nestor">{{ button_label|default('Save') }}</button>
+  <button type="submit" form="section_form" class="btn btn-nestor">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
