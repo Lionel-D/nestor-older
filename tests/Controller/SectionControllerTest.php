@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use App\Tests\AppTestCase;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class SectionControllerTest extends AppTestCase
 {
@@ -55,9 +56,9 @@ final class SectionControllerTest extends AppTestCase
     {
         $this->assertLoggedAsUser();
 
-        $testSectionId = $this->getLastAddedSectionId();
+        $testSection = $this->getLastAddedSection();
 
-        $crawler = $this->successfullyLoadEditPage($testSectionId);
+        $crawler = $this->successfullyLoadEditPage($testSection['id']);
         $formData = [
             'name' => '',
             'description' => 'Some description for this section',
@@ -73,9 +74,9 @@ final class SectionControllerTest extends AppTestCase
     {
         $this->assertLoggedAsUser();
 
-        $testSectionId = $this->getLastAddedSectionId();
+        $testSection = $this->getLastAddedSection();
 
-        $crawler = $this->successfullyLoadEditPage($testSectionId);
+        $crawler = $this->successfullyLoadEditPage($testSection['id']);
         $formData = [
             'name' => 'Some Section',
             'description' => 'Some description for this section',
@@ -90,13 +91,44 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('table', 'Some description for this section');
     }
 
+    public function testEditSuccessfulAddImage(): void
+    {
+        $this->assertLoggedAsUser();
+
+        $testSection = $this->getLastAddedSection();
+
+        $crawler = $this->successfullyLoadEditPage($testSection['id']);
+        $testImage = new UploadedFile(
+            __DIR__.'/../vegetables.jpg',
+            'vegetables.jpg',
+            'image/jpeg'
+        );
+        $formData = [
+            'name' => 'Some Section',
+            'description' => 'Some description for this section',
+            'image' => $testImage,
+        ];
+
+        $this->fillAndSubmitSectionForm($crawler, $formData);
+
+        $this->assertResponseRedirects('/app/section/');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('.alert-success', 'Section updated !');
+        $this->assertSelectorTextContains('table', 'Some Section');
+        $this->assertSelectorTextContains('table', 'Some description for this section');
+
+        $testSection = $this->getLastAddedSection();
+
+        $this->assertStringContainsString('/uploads/section/tiny_vegetables', $testSection['cols'][0]['img']);
+    }
+
     public function testDeleteSuccessful(): void
     {
         $this->assertLoggedAsUser();
 
-        $testSectionId = $this->getLastAddedSectionId();
+        $testSection = $this->getLastAddedSection();
         $crawler = $this->kernelBrowser->request('GET', '/app/section/');
-        $form = $crawler->selectButton('section_'.$testSectionId.'_submit')->form();
+        $form = $crawler->selectButton('section_'.$testSection['id'].'_submit')->form();
 
         $this->kernelBrowser->submit($form);
 
@@ -136,13 +168,13 @@ final class SectionControllerTest extends AppTestCase
         $form['section[description]'] = $formData['description'];
 
         if (isset($formData['image'])) {
-            $form['section[image]'] = $formData['image'];
+            $form['section[image]']->upload($formData['image']);
         }
 
         $this->kernelBrowser->submit($form);
     }
 
-    private function getLastAddedSectionId(): string
+    private function getLastAddedSection(): array
     {
         $crawler = $this->kernelBrowser->request('GET', '/app/section/');
 
@@ -151,14 +183,15 @@ final class SectionControllerTest extends AppTestCase
                 return [
                     'id' => $tr->attr('id'),
                     'cols' => $tr->filter('td')->each(function ($td, $i) {
-                        return $td->text();
+                        return [
+                            'img' => $td->children()->attr('src'),
+                            'text' => $td->text(),
+                        ];
                     }),
                 ];
             }
         );
 
-        $lastAdded = array_pop($sectionList);
-
-        return $lastAdded['id'];
+        return array_pop($sectionList);
     }
 }
