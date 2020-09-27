@@ -4,6 +4,7 @@ namespace App\Tests\Controller;
 
 use App\Tests\AppTestCase;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\DomCrawler\Field\FileFormField;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class SectionControllerTest extends AppTestCase
@@ -98,11 +99,7 @@ final class SectionControllerTest extends AppTestCase
         $testSection = $this->getLastAddedSection();
 
         $crawler = $this->successfullyLoadEditPage($testSection['id']);
-        $testImage = new UploadedFile(
-            __DIR__.'/../vegetables.jpg',
-            'vegetables.jpg',
-            'image/jpeg'
-        );
+        $testImage = new UploadedFile(__DIR__.'/../vegetables.jpg', 'vegetables.jpg', 'image/jpeg');
         $formData = [
             'name' => 'Some Section',
             'description' => 'Some description for this section',
@@ -168,12 +165,17 @@ final class SectionControllerTest extends AppTestCase
         $form['section[description]'] = $formData['description'];
 
         if (isset($formData['image'])) {
-            $form['section[image]']->upload($formData['image']);
+            /** @var FileFormField $fileFormField */
+            $fileFormField = $form['section[image]'];
+            $fileFormField->upload($formData['image']);
         }
 
         $this->kernelBrowser->submit($form);
     }
 
+    /**
+     * @return mixed[]
+     */
     private function getLastAddedSection(): array
     {
         $crawler = $this->kernelBrowser->request('GET', '/app/section/');
