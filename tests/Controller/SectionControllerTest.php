@@ -92,6 +92,20 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('table', 'Some description for this section');
     }
 
+    public function testShow(): void
+    {
+        $this->assertLoggedAsUser();
+
+        $testSection = $this->getLastAddedSection();
+
+        $this->kernelBrowser->request('GET', '/app/section/'.$testSection['id']);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Section details');
+        $this->assertSelectorTextContains('dl', 'Some Section');
+        $this->assertSelectorTextContains('dl', 'Some description for this section');
+    }
+
     public function testEditSuccessfulAddImage(): void
     {
         $this->assertLoggedAsUser();

@@ -7,7 +7,6 @@ use App\Form\SectionType;
 use App\Repository\SectionRepository;
 use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,20 +38,18 @@ final class SectionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadParams = $this->getParameter('uploads')['section_images'];
-            $imageFilename = $imageUploader->upload($form->get('image')->getData(), $uploadParams);
+            if (null !== $form->get('image')->getData()) {
+                $uploadParams = $this->getParameter('uploads')['section_images'];
+                $imageFilename = $imageUploader->upload($form->get('image')->getData(), $uploadParams);
 
-            if (null !== $imageFilename) {
-                $section->setImageFilename($imageFilename);
-            } else {
-                $this->addFlash('warning', 'Image could not be uploaded !');
+                $this->handleUploadResult($imageFilename, $section);
             }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($section);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Section added !');
+            $this->addFlash('success', 'alert_success_section_added');
 
             return $this->redirectToRoute('app_section_index');
         }
@@ -82,20 +79,20 @@ final class SectionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form->get('image')->getData();
-            $uploadParams = $this->getParameter('uploads')['section_images'];
-            $imageFilename = $imageUploader->upload($imageFile, $uploadParams, $section->getImageFilename());
+            if (null !== $form->get('image')->getData()) {
+                $uploadParams = $this->getParameter('uploads')['section_images'];
+                $imageFilename = $imageUploader->upload(
+                    $form->get('image')->getData(),
+                    $uploadParams,
+                    $section->getImageFilename()
+                );
 
-            if (null !== $imageFilename) {
-                $section->setImageFilename($imageFilename);
-            } else {
-                $this->addFlash('warning', 'Image could not be uploaded !');
+                $this->handleUploadResult($imageFilename, $section);
             }
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Section updated !');
+            $this->addFlash('success', 'alert_success_section_updated');
 
             return $this->redirectToRoute('app_section_index');
         }
@@ -123,7 +120,7 @@ final class SectionController extends AbstractController
             $entityManager->remove($section);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Section deleted !');
+            $this->addFlash('success', 'alert_success_section_deleted');
         }
 
         return $this->redirectToRoute('app_section_index');
@@ -146,11 +143,23 @@ final class SectionController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'Image deleted !');
+            $this->addFlash('success', 'alert_success_img_deleted');
         }
 
         return $this->redirectToRoute('app_section_edit', [
             'id' => $section->getId(),
         ]);
+    }
+
+    /**
+     * @param string|false $imageFilename
+     */
+    private function handleUploadResult($imageFilename, Section $section): void
+    {
+        if (false !== $imageFilename) {
+            $section->setImageFilename($imageFilename);
+        } else {
+            $this->addFlash('warning', 'alert_warning_img_upload');
+        }
     }
 }

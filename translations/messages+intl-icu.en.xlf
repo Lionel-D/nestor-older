@@ -47,11 +47,11 @@
       </trans-unit>
       <trans-unit id="IZ2uUA4" resname="section_name">
         <source>section_name</source>
-        <target>Section's name</target>
+        <target>Section name</target>
       </trans-unit>
       <trans-unit id="tUikcVR" resname="section_description">
         <source>section_description</source>
-        <target>Section's description</target>
+        <target>Section description</target>
       </trans-unit>
       <trans-unit id="sILXQRi" resname="global_noresult">
         <source>global_noresult</source>
@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="npG6R0a" resname="section_show_title">
         <source>section_show_title</source>
-        <target>Section's details</target>
+        <target>Section details</target>
       </trans-unit>
       <trans-unit id="g42fdcT" resname="dashboard_menu">
         <source>dashboard_menu</source>
@@ -68,6 +68,26 @@
       <trans-unit id="IuVRgOC" resname="section_menu">
         <source>section_menu</source>
         <target>Sections</target>
+      </trans-unit>
+      <trans-unit id="alert_warning_img_upload" resname="alert_warning_img_upload">
+        <source>alert_warning_img_upload</source>
+        <target>Image could not be uploaded !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_section_added" resname="alert_success_section_added">
+        <source>alert_success_section_added</source>
+        <target>Section added !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_section_updated" resname="alert_success_section_updated">
+        <source>alert_success_section_updated</source>
+        <target>Section updated !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_section_deleted" resname="alert_success_section_deleted">
+        <source>alert_success_section_deleted</source>
+        <target>Section deleted !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_img_deleted" resname="alert_success_img_deleted">
+        <source>alert_success_img_deleted</source>
+        <target>Image deleted !</target>
       </trans-unit>
     </body>
   </file>

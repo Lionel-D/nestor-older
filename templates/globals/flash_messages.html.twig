@@ -2,7 +2,7 @@
   <div class="alert alert-{{ label }} alert-dismissible fade show mb-4" role="alert">
     <ul class="mb-0">
       {% for message in messages %}
-        <li>{{ message }}</li>
+        <li>{{ message|trans }}</li>
       {% endfor %}
     </ul>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -35,16 +35,16 @@ final class ImageUploader
     }
 
     /**
-     * @param UploadedFile|null $uploadedFile
-     * @param mixed[]           $uploadParams
-     * @param string|null       $replacedFilename
+     * @param UploadedFile $uploadedFile
+     * @param mixed[]      $uploadParams
+     * @param string|null  $replacedFilename
      *
-     * @return string|null
+     * @return string|false
      */
     public function upload($uploadedFile, $uploadParams, $replacedFilename = null)
     {
-        if (null === $uploadedFile || null === $uploadedFile->getClientOriginalName()) {
-            return null;
+        if (null === $uploadedFile->getClientOriginalName()) {
+            throw new FileException('No original name for uploaded file');
         }
 
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -54,7 +54,7 @@ final class ImageUploader
         try {
             $uploadedFile->move($uploadParams['path'], $fileName);
         } catch (FileException $fileException) {
-            return null;
+            return false;
         }
 
         foreach ($uploadParams['formats'] as $format) {
