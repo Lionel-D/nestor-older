@@ -22,10 +22,10 @@
       <tbody>
         {% for section in sections %}
           {% set delete_modal_id = 'delete_section_' ~ section.id ~ '_modal' %}
-          <tr>
+          <tr id="{{ section.id }}">
             <td class="td-thumbnail">
               {% if section.imageFilename is not null %}
-                <img src="{{ asset('uploads/section/' ~ section.imageFilename) }}" class="img-fluid rounded" alt="">
+                <img src="{{ asset('uploads/section/tiny_' ~ section.imageFilename) }}" class="img-fluid rounded" alt="">
               {% else %}
                 <img src="{{ asset('build/images/section-default-thumbnail.jpg') }}" srcset="{{ asset('build/images/section-default-thumbnail.jpg') }} 1x, {{ asset('build/images/section-default-thumbnail@2x.jpg') }} 2x" class="img-fluid rounded" alt="">
               {% endif %}

@@ -50,12 +50,19 @@ final class SectionController extends AbstractController
                     $imageFile,
                     $this->getParameter('uploads')['section_images']
                 );
-                $section->setImageFilename($imageFilename);
+
+                if ($imageFilename !== false) {
+                    $section->setImageFilename($imageFilename);
+                } else {
+                    $this->addFlash('warning', 'Image could not be uploaded !');
+                }
             }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($section);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Section added !');
 
             return $this->redirectToRoute('app_section_index');
         }
@@ -100,10 +107,17 @@ final class SectionController extends AbstractController
                     $this->getParameter('uploads')['section_images'],
                     $section->getImageFilename()
                 );
-                $section->setImageFilename($imageFilename);
+
+                if ($imageFilename !== false) {
+                    $section->setImageFilename($imageFilename);
+                } else {
+                    $this->addFlash('warning', 'Image could not be uploaded !');
+                }
             }
 
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Section updated !');
 
             return $this->redirectToRoute('app_section_index');
         }
@@ -115,7 +129,7 @@ final class SectionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="delete", methods={"DELETE"})
      * @param Request       $request
      * @param Section       $section
      * @param ImageUploader $imageUploader
@@ -134,13 +148,15 @@ final class SectionController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($section);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Section deleted !');
         }
 
         return $this->redirectToRoute('app_section_index');
     }
 
     /**
-     * @Route("/img/{id}", name="delete_img", methods={"DELETE"})
+     * @Route("/{id}/img/delete", name="delete_img", methods={"DELETE"})
      * @param Request       $request
      * @param Section       $section
      * @param ImageUploader $imageUploader
@@ -159,6 +175,8 @@ final class SectionController extends AbstractController
             }
 
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Image deleted !');
         }
 
         return $this->redirectToRoute('app_section_edit', [

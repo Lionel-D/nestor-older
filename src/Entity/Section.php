@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\SectionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SectionRepository::class)
+ *
+ * @see \App\Tests\Entity\SectionTest
  */
 class Section
 {
@@ -21,6 +24,7 @@ class Section
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="empty_name")
      */
     private $name;
 
@@ -46,7 +50,7 @@ class Section
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

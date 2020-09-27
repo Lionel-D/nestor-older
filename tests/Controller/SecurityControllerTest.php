@@ -276,12 +276,12 @@ final class SecurityControllerTest extends AppTestCase
     {
         $form = $crawler->selectButton('register_submit')->form();
 
-        $form['registration_form[email]'] = $formData['email'];
-        $form['registration_form[name]'] = $formData['name'];
-        $form['registration_form[plainPassword]'] = $formData['password'];
+        $form['registration[email]'] = $formData['email'];
+        $form['registration[name]'] = $formData['name'];
+        $form['registration[plainPassword]'] = $formData['password'];
 
         if ($formData['terms']) {
-            $form['registration_form[agreeTerms]'] = '1';
+            $form['registration[agreeTerms]'] = '1';
         }
 
         $this->kernelBrowser->submit($form);

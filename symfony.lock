@@ -114,6 +114,9 @@
             ".php_cs.dist"
         ]
     },
+    "imagine/imagine": {
+        "version": "1.2.3"
+    },
     "jean85/pretty-package-versions": {
         "version": "1.2"
     },
@@ -145,7 +148,7 @@
         "version": "3.4.0"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.3"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"

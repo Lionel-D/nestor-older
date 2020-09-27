@@ -2,6 +2,9 @@
 
 namespace App\Service;
 
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\ImageInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -19,10 +22,16 @@ class ImageUploader
      */
     private $fileSystem;
 
+    /**
+     * @var Imagine
+     */
+    private $imagine;
+
     public function __construct(SluggerInterface $slugger, Filesystem $fileSystem)
     {
         $this->slugger = $slugger;
         $this->fileSystem = $fileSystem;
+        $this->imagine = new Imagine();
     }
 
     public function upload(UploadedFile $file, $uploadParams, $replacedFilename = null)
@@ -33,8 +42,12 @@ class ImageUploader
 
         try {
             $file->move($uploadParams['path'], $fileName);
-        } catch (FileException $e) {
-            // ... handle exception if something happens during file upload
+        } catch (FileException $fileException) {
+            return false;
+        }
+
+        foreach ($uploadParams['formats'] as $format) {
+            $this->resize($uploadParams['path'], $fileName, $format);
         }
 
         if ($replacedFilename !== null) {
@@ -44,8 +57,31 @@ class ImageUploader
         return $fileName;
     }
 
-    public function remove($filename, $uploadParams)
+    public function resize($path, $fileName, $format)
     {
-        $this->fileSystem->remove($uploadParams['path'].'/'.$filename);
+        $mode = ImageInterface::THUMBNAIL_OUTBOUND;
+
+        $image = $this->imagine->open($path.'/'.$fileName);
+
+        $formatName = $fileName;
+
+        if ($format['prefix'] !== '') {
+            $formatName = $format['prefix'].'_'.$formatName;
+        }
+
+        $image->thumbnail(new Box($format['width'], $format['height']), $mode)->save($path.'/'.$formatName);
+    }
+
+    public function remove($fileName, $uploadParams)
+    {
+        foreach ($uploadParams['formats'] as $format) {
+            $formatName = $fileName;
+
+            if ($format['prefix'] !== '') {
+                $formatName = $format['prefix'].'_'.$formatName;
+            }
+
+            $this->fileSystem->remove($uploadParams['path'].'/'.$formatName);
+        }
     }
 }
