@@ -14,13 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/app/section", name="app_section_")
+ *
+ * @see \App\Tests\Controller\SectionControllerTest
  */
 final class SectionController extends AbstractController
 {
     /**
      * @Route("/", name="index", methods={"GET"})
-     * @param SectionRepository $sectionRepository
-     * @return Response
      */
     public function index(SectionRepository $sectionRepository): Response
     {
@@ -31,9 +31,6 @@ final class SectionController extends AbstractController
 
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
-     * @param Request          $request
-     * @param ImageUploader $imageUploader
-     * @return Response
      */
     public function new(Request $request, ImageUploader $imageUploader): Response
     {
@@ -45,13 +42,13 @@ final class SectionController extends AbstractController
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
 
-            if ($imageFile) {
+            if (null !== $imageFile) {
                 $imageFilename = $imageUploader->upload(
                     $imageFile,
                     $this->getParameter('uploads')['section_images']
                 );
 
-                if ($imageFilename !== false) {
+                if (null !== $imageFilename) {
                     $section->setImageFilename($imageFilename);
                 } else {
                     $this->addFlash('warning', 'Image could not be uploaded !');
@@ -75,8 +72,6 @@ final class SectionController extends AbstractController
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
-     * @param Section $section
-     * @return Response
      */
     public function show(Section $section): Response
     {
@@ -87,10 +82,6 @@ final class SectionController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
-     * @param Request       $request
-     * @param Section       $section
-     * @param ImageUploader $imageUploader
-     * @return Response
      */
     public function edit(Request $request, Section $section, ImageUploader $imageUploader): Response
     {
@@ -101,14 +92,14 @@ final class SectionController extends AbstractController
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
 
-            if ($imageFile) {
+            if (null !== $imageFile) {
                 $imageFilename = $imageUploader->upload(
                     $imageFile,
                     $this->getParameter('uploads')['section_images'],
                     $section->getImageFilename()
                 );
 
-                if ($imageFilename !== false) {
+                if (null !== $imageFilename) {
                     $section->setImageFilename($imageFilename);
                 } else {
                     $this->addFlash('warning', 'Image could not be uploaded !');
@@ -130,15 +121,11 @@ final class SectionController extends AbstractController
 
     /**
      * @Route("/{id}/delete", name="delete", methods={"DELETE"})
-     * @param Request       $request
-     * @param Section       $section
-     * @param ImageUploader $imageUploader
-     * @return Response
      */
     public function delete(Request $request, Section $section, ImageUploader $imageUploader): Response
     {
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {
-            if ($section->getImageFilename() !== null) {
+            if (null !== $section->getImageFilename()) {
                 $imageUploader->remove(
                     $section->getImageFilename(),
                     $this->getParameter('uploads')['section_images']
@@ -157,15 +144,11 @@ final class SectionController extends AbstractController
 
     /**
      * @Route("/{id}/img/delete", name="delete_img", methods={"DELETE"})
-     * @param Request       $request
-     * @param Section       $section
-     * @param ImageUploader $imageUploader
-     * @return Response
      */
     public function deleteImage(Request $request, Section $section, ImageUploader $imageUploader): Response
     {
         if ($this->isCsrfTokenValid('delete_image'.$section->getId(), $request->request->get('_token'))) {
-            if ($section->getImageFilename() !== null) {
+            if (null !== $section->getImageFilename()) {
                 $imageUploader->remove(
                     $section->getImageFilename(),
                     $this->getParameter('uploads')['section_images']
@@ -180,7 +163,7 @@ final class SectionController extends AbstractController
         }
 
         return $this->redirectToRoute('app_section_edit', [
-            'id' => $section->getId()
+            'id' => $section->getId(),
         ]);
     }
 }

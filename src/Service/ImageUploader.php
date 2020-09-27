@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class ImageUploader
+final class ImageUploader
 {
     /**
      * @var SluggerInterface
@@ -27,37 +27,52 @@ class ImageUploader
      */
     private $imagine;
 
-    public function __construct(SluggerInterface $slugger, Filesystem $fileSystem)
+    public function __construct(SluggerInterface $slugger, Filesystem $filesystem)
     {
         $this->slugger = $slugger;
-        $this->fileSystem = $fileSystem;
+        $this->fileSystem = $filesystem;
         $this->imagine = new Imagine();
     }
 
-    public function upload(UploadedFile $file, $uploadParams, $replacedFilename = null)
+    /**
+     * @param mixed[]     $uploadParams
+     * @param string|null $replacedFilename
+     *
+     * @return string|null
+     */
+    public function upload(UploadedFile $uploadedFile, $uploadParams, $replacedFilename = null)
     {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        if (null === $uploadedFile->getClientOriginalName()) {
+            return null;
+        }
+
+        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
-        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+        $fileName = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
 
         try {
-            $file->move($uploadParams['path'], $fileName);
+            $uploadedFile->move($uploadParams['path'], $fileName);
         } catch (FileException $fileException) {
-            return false;
+            return null;
         }
 
         foreach ($uploadParams['formats'] as $format) {
             $this->resize($uploadParams['path'], $fileName, $format);
         }
 
-        if ($replacedFilename !== null) {
+        if (null !== $replacedFilename) {
             $this->remove($replacedFilename, $uploadParams);
         }
 
         return $fileName;
     }
 
-    public function resize($path, $fileName, $format)
+    /**
+     * @param string  $path
+     * @param string  $fileName
+     * @param mixed[] $format
+     */
+    public function resize($path, $fileName, $format): void
     {
         $mode = ImageInterface::THUMBNAIL_OUTBOUND;
 
@@ -65,19 +80,23 @@ class ImageUploader
 
         $formatName = $fileName;
 
-        if ($format['prefix'] !== '') {
+        if ('' !== $format['prefix']) {
             $formatName = $format['prefix'].'_'.$formatName;
         }
 
         $image->thumbnail(new Box($format['width'], $format['height']), $mode)->save($path.'/'.$formatName);
     }
 
-    public function remove($fileName, $uploadParams)
+    /**
+     * @param string  $fileName
+     * @param mixed[] $uploadParams
+     */
+    public function remove($fileName, $uploadParams): void
     {
         foreach ($uploadParams['formats'] as $format) {
             $formatName = $fileName;
 
-            if ($format['prefix'] !== '') {
+            if ('' !== $format['prefix']) {
                 $formatName = $format['prefix'].'_'.$formatName;
             }
 

@@ -19,7 +19,9 @@ final class SectionType extends AbstractType
     public function buildForm(FormBuilderInterface $formBuilder, array $options): void
     {
         $formBuilder
-            ->add('name', TextType::class)
+            ->add('name', TextType::class, [
+                'empty_data' => '',
+            ])
             ->add('description', TextType::class, [
                 'required' => false,
             ])
@@ -30,7 +32,7 @@ final class SectionType extends AbstractType
                 'constraints' => [
                     new Image([
                         'maxSize' => '1024k',
-                    ])
+                    ]),
                 ],
             ])
         ;

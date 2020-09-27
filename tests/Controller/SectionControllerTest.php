@@ -17,7 +17,7 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('h1', 'Sections list');
     }
 
-    public function testNewFailedNoName():void
+    public function testNewFailedNoName(): void
     {
         $this->assertLoggedAsUser();
 
@@ -33,7 +33,7 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('.form-error-message', 'Please choose a name');
     }
 
-    public function testNewSuccessfulNoDescription():void
+    public function testNewSuccessfulNoDescription(): void
     {
         $this->assertLoggedAsUser();
 
@@ -51,7 +51,7 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('table', 'Some Section');
     }
 
-    public function testEditFailedNoName():void
+    public function testEditFailedNoName(): void
     {
         $this->assertLoggedAsUser();
 
@@ -69,7 +69,7 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('.form-error-message', 'Please choose a name');
     }
 
-    public function testEditSuccessfulAddDescription():void
+    public function testEditSuccessfulAddDescription(): void
     {
         $this->assertLoggedAsUser();
 
@@ -90,7 +90,7 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('table', 'Some description for this section');
     }
 
-    public function testDeleteSuccessful():void
+    public function testDeleteSuccessful(): void
     {
         $this->assertLoggedAsUser();
 
@@ -115,7 +115,7 @@ final class SectionControllerTest extends AppTestCase
         return $crawler;
     }
 
-    private function successfullyLoadEditPage($id): Crawler
+    private function successfullyLoadEditPage(string $id): Crawler
     {
         $crawler = $this->kernelBrowser->request('GET', '/app/section/'.$id.'/edit');
 
@@ -142,7 +142,7 @@ final class SectionControllerTest extends AppTestCase
         $this->kernelBrowser->submit($form);
     }
 
-    private function getLastAddedSectionId()
+    private function getLastAddedSectionId(): string
     {
         $crawler = $this->kernelBrowser->request('GET', '/app/section/');
 
@@ -150,11 +150,9 @@ final class SectionControllerTest extends AppTestCase
             function ($tr, $i) {
                 return [
                     'id' => $tr->attr('id'),
-                    'cols' => $tr->filter('td')->each(
-                        function ($td, $i) {
-                            return $td->text();
-                        }
-                    ),
+                    'cols' => $tr->filter('td')->each(function ($td, $i) {
+                        return $td->text();
+                    }),
                 ];
             }
         );
