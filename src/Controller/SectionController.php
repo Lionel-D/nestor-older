@@ -43,10 +43,8 @@ final class SectionController extends AbstractController
             $imageFile = $form->get('image')->getData();
 
             if (null !== $imageFile) {
-                $imageFilename = $imageUploader->upload(
-                    $imageFile,
-                    $this->getParameter('uploads')['section_images']
-                );
+                $uploadParams = $this->getParameter('uploads')['section_images'];
+                $imageFilename = $imageUploader->upload($imageFile, $uploadParams);
 
                 if (null !== $imageFilename) {
                     $section->setImageFilename($imageFilename);
@@ -93,11 +91,8 @@ final class SectionController extends AbstractController
             $imageFile = $form->get('image')->getData();
 
             if (null !== $imageFile) {
-                $imageFilename = $imageUploader->upload(
-                    $imageFile,
-                    $this->getParameter('uploads')['section_images'],
-                    $section->getImageFilename()
-                );
+                $uploadParams = $this->getParameter('uploads')['section_images'];
+                $imageFilename = $imageUploader->upload($imageFile, $uploadParams, $section->getImageFilename());
 
                 if (null !== $imageFilename) {
                     $section->setImageFilename($imageFilename);
