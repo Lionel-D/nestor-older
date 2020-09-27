@@ -38,3 +38,33 @@ label {
     content: '*';
   }
 }
+
+.table {
+  thead th {
+    vertical-align: middle;
+  }
+
+  th, td {
+    vertical-align: middle;
+  }
+}
+
+.table-sm {
+  th, td {
+    line-height: 1.2;
+  }
+}
+
+.td-thumbnail {
+  width: 48px;
+}
+
+.img-thumbnail {
+  position: relative;
+
+  .btn-img-remove {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+}

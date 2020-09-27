@@ -4,6 +4,18 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    uploads:
+        section_images:
+            path: '%kernel.project_dir%/public/uploads/section'
+            formats:
+                std:
+                    prefix: ''
+                    width: 350
+                    height: 350
+                tiny:
+                    prefix: 'tiny'
+                    width: 40
+                    height: 40
 
 services:
     # default configuration for services in *this* file

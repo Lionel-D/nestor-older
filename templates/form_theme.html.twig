@@ -36,9 +36,11 @@
       {%- set wrapper_class = wrapper_class ~ ' custom-control-inline' -%}
       {%- set attr = attr|merge({class: (attr.class|replace({'custom-control-inline': '', '  ': ' '}))|trim}) -%}
     {% endif %}
+  {%- elseif type == 'file' -%}
+    {%- set wrapper_class = 'custom-file' -%}
   {%- endif -%}
   <{{ element|default('div') }} class="form-group">
-  {%- if type == 'checkbox' or type == 'radio' -%}
+  {%- if type == 'checkbox' or type == 'radio' or type == 'file' -%}
     {{- form_errors(form) -}}
     <div class="{{ wrapper_class }}">
       {{- form_widget(form, widget_attr) -}}

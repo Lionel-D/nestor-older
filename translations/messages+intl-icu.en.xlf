@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -28,6 +28,66 @@
       <trans-unit id="Z.yIrEX" resname="homepage_title">
         <source>homepage_title</source>
         <target>Homepage</target>
+      </trans-unit>
+      <trans-unit id="5BFNUhK" resname="image_help">
+        <source>image_help</source>
+        <target>To add an image or change the current one, select a file from the field above. To remove the existing image, click the remove button on the preview.</target>
+      </trans-unit>
+      <trans-unit id="Wgedstl" resname="section_edit_title">
+        <source>section_edit_title</source>
+        <target>Edit section</target>
+      </trans-unit>
+      <trans-unit id="fXfwERh" resname="section_new_title">
+        <source>section_new_title</source>
+        <target>Create section</target>
+      </trans-unit>
+      <trans-unit id="ey4imXS" resname="section_list_title">
+        <source>section_list_title</source>
+        <target>Sections list</target>
+      </trans-unit>
+      <trans-unit id="IZ2uUA4" resname="section_name">
+        <source>section_name</source>
+        <target>Section name</target>
+      </trans-unit>
+      <trans-unit id="tUikcVR" resname="section_description">
+        <source>section_description</source>
+        <target>Section description</target>
+      </trans-unit>
+      <trans-unit id="sILXQRi" resname="global_noresult">
+        <source>global_noresult</source>
+        <target>No result</target>
+      </trans-unit>
+      <trans-unit id="npG6R0a" resname="section_show_title">
+        <source>section_show_title</source>
+        <target>Section details</target>
+      </trans-unit>
+      <trans-unit id="g42fdcT" resname="dashboard_menu">
+        <source>dashboard_menu</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="IuVRgOC" resname="section_menu">
+        <source>section_menu</source>
+        <target>Sections</target>
+      </trans-unit>
+      <trans-unit id="alert_warning_img_upload" resname="alert_warning_img_upload">
+        <source>alert_warning_img_upload</source>
+        <target>Image could not be uploaded !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_section_added" resname="alert_success_section_added">
+        <source>alert_success_section_added</source>
+        <target>Section added !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_section_updated" resname="alert_success_section_updated">
+        <source>alert_success_section_updated</source>
+        <target>Section updated !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_section_deleted" resname="alert_success_section_deleted">
+        <source>alert_success_section_deleted</source>
+        <target>Section deleted !</target>
+      </trans-unit>
+      <trans-unit id="alert_success_img_deleted" resname="alert_success_img_deleted">
+        <source>alert_success_img_deleted</source>
+        <target>Image deleted !</target>
       </trans-unit>
     </body>
   </file>

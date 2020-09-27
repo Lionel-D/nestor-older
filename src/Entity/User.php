@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="already_used_email")
  *
  * @see \App\Tests\Entity\UserTest
- * @UniqueEntity(fields={"email"}, message="already_used_email")
  */
 class User implements UserInterface
 {

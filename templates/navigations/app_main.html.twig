@@ -1,0 +1,20 @@
+{% extends 'globals/header.html.twig' %}
+
+{% block header_nav %}
+  <li class="nav-item{% if app.request.get('_route') == 'app_dashboard' %} active{% endif %}">
+    <a href="{{ path('app_dashboard') }}" class="nav-link">
+      {{ 'dashboard_menu'|trans }}
+    </a>
+  </li>
+  <li class="nav-item{% if app.request.get('_route') == 'app_section_index' %} active{% endif %}">
+    <a href="{{ path('app_section_index') }}" class="nav-link">
+      {{ 'section_menu'|trans }}
+    </a>
+  </li>
+{% endblock %}
+
+{% block header_buttons %}
+  <a href="{{ path('security_logout') }}" class="btn btn-sm btn-outline-nestor">
+    {{ 'logout_link'|trans({},'security') }} <i class="fas fa-sign-out-alt"></i>
+  </a>
+{% endblock %}

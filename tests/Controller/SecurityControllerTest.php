@@ -35,7 +35,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->fillAndSubmitLoginForm($crawler, 'hello@lionel-d.com', 'password');
 
-        $this->assertResponseRedirects('/app/dashboard');
+        $this->assertResponseRedirects('/app/');
         $this->kernelBrowser->followRedirect();
         $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
@@ -46,7 +46,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->kernelBrowser->request('GET', '/login');
 
-        $this->assertResponseRedirects('/app/dashboard');
+        $this->assertResponseRedirects('/app/');
         $this->kernelBrowser->followRedirect();
         $this->assertSelectorTextContains('h1', 'Welcome Lionel');
     }
@@ -234,7 +234,7 @@ final class SecurityControllerTest extends AppTestCase
 
         $this->fillAndSubmitRegisterForm($crawler, $formData);
 
-        $this->assertResponseRedirects('/app/dashboard');
+        $this->assertResponseRedirects('/app/');
         $this->kernelBrowser->followRedirect();
         $this->assertSelectorTextContains('h1', 'Welcome NewUser');
     }
@@ -276,12 +276,12 @@ final class SecurityControllerTest extends AppTestCase
     {
         $form = $crawler->selectButton('register_submit')->form();
 
-        $form['registration_form[email]'] = $formData['email'];
-        $form['registration_form[name]'] = $formData['name'];
-        $form['registration_form[plainPassword]'] = $formData['password'];
+        $form['registration[email]'] = $formData['email'];
+        $form['registration[name]'] = $formData['name'];
+        $form['registration[plainPassword]'] = $formData['password'];
 
         if ($formData['terms']) {
-            $form['registration_form[agreeTerms]'] = '1';
+            $form['registration[agreeTerms]'] = '1';
         }
 
         $this->kernelBrowser->submit($form);

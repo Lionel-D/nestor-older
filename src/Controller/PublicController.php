@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Controller\Web;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @see \App\Tests\Controller\Web\HomepageControllerTest
+ * @see \App\Tests\Controller\PublicControllerTest
  */
-final class HomepageController extends AbstractController
+final class PublicController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
     public function index(): Response
     {
-        return $this->render('web/homepage/index.html.twig', [
-            'controller_name' => 'HomepageController',
-        ]);
+        return $this->render('public/index.html.twig');
     }
 }
