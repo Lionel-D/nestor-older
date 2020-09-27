@@ -35,14 +35,15 @@ final class ImageUploader
     }
 
     /**
-     * @param mixed[]     $uploadParams
-     * @param string|null $replacedFilename
+     * @param UploadedFile|null $uploadedFile
+     * @param mixed[]           $uploadParams
+     * @param string|null       $replacedFilename
      *
      * @return string|null
      */
-    public function upload(UploadedFile $uploadedFile, $uploadParams, $replacedFilename = null)
+    public function upload($uploadedFile, $uploadParams, $replacedFilename = null)
     {
-        if (null === $uploadedFile->getClientOriginalName()) {
+        if (null === $uploadedFile || null === $uploadedFile->getClientOriginalName()) {
             return null;
         }
 

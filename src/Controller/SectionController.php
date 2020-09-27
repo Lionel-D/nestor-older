@@ -39,18 +39,13 @@ final class SectionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $imageFile */
-            $imageFile = $form->get('image')->getData();
+            $uploadParams = $this->getParameter('uploads')['section_images'];
+            $imageFilename = $imageUploader->upload($form->get('image')->getData(), $uploadParams);
 
-            if (null !== $imageFile) {
-                $uploadParams = $this->getParameter('uploads')['section_images'];
-                $imageFilename = $imageUploader->upload($imageFile, $uploadParams);
-
-                if (null !== $imageFilename) {
-                    $section->setImageFilename($imageFilename);
-                } else {
-                    $this->addFlash('warning', 'Image could not be uploaded !');
-                }
+            if (null !== $imageFilename) {
+                $section->setImageFilename($imageFilename);
+            } else {
+                $this->addFlash('warning', 'Image could not be uploaded !');
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -89,16 +84,13 @@ final class SectionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
+            $uploadParams = $this->getParameter('uploads')['section_images'];
+            $imageFilename = $imageUploader->upload($imageFile, $uploadParams, $section->getImageFilename());
 
-            if (null !== $imageFile) {
-                $uploadParams = $this->getParameter('uploads')['section_images'];
-                $imageFilename = $imageUploader->upload($imageFile, $uploadParams, $section->getImageFilename());
-
-                if (null !== $imageFilename) {
-                    $section->setImageFilename($imageFilename);
-                } else {
-                    $this->addFlash('warning', 'Image could not be uploaded !');
-                }
+            if (null !== $imageFilename) {
+                $section->setImageFilename($imageFilename);
+            } else {
+                $this->addFlash('warning', 'Image could not be uploaded !');
             }
 
             $this->getDoctrine()->getManager()->flush();
