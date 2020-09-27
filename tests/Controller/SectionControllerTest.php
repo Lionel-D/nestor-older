@@ -117,6 +117,30 @@ final class SectionControllerTest extends AppTestCase
         $testSection = $this->getLastAddedSection();
 
         $this->assertStringContainsString('/uploads/section/tiny_vegetables', $testSection['cols'][0]['img']);
+        $this->assertFileExists(__DIR__.'/../../public/'.$testSection['cols'][0]['img']);
+    }
+
+    public function testEditSuccessfulRemoveImage(): void
+    {
+        $this->assertLoggedAsUser();
+
+        $testSection = $this->getLastAddedSection();
+        $crawler = $this->successfullyLoadEditPage($testSection['id']);
+
+        $imgSrc = $crawler->filter('.img-thumbnail')->first()->children()->eq(1)->attr('src');
+
+        $form = $crawler->selectButton('section_'.$testSection['id'].'_img_submit')->form();
+
+        $this->kernelBrowser->submit($form);
+
+        $this->assertResponseRedirects('/app/section/'.$testSection['id'].'/edit');
+        $crawler = $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('.alert-success', 'Image deleted !');
+
+        $newImgSrc = $crawler->filter('.img-thumbnail')->first()->children()->first()->attr('src');
+
+        $this->assertSame('/build/images/section-default-thumbnail.jpg', $newImgSrc);
+        $this->assertFileNotExists(__DIR__.'/../../public/'.$imgSrc);
     }
 
     public function testDeleteSuccessful(): void

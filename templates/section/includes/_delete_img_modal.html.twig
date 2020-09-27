@@ -12,6 +12,6 @@
   <form id="section_img_form" method="post" action="{{ path('app_section_delete_img', {'id': section.id}) }}" class="d-inline-block">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete_image' ~ section.id) }}">
-    <button type="submit" form="section_img_form" class="btn btn-sm btn-danger">Delete</button>
+    <button id="section_{{ section.id }}_img_submit" type="submit" form="section_img_form" class="btn btn-sm btn-danger">Delete</button>
   </form>
 {% endblock %}
