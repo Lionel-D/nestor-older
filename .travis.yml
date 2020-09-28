@@ -2,7 +2,7 @@
 language: php
 
 # Language version
-php: 7.3.21
+php: 7.3.22
 
 services:
     - mysql
