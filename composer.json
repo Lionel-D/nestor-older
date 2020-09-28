@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.3.21",
+        "php": "^7.3.22",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "imagine/imagine": "^1.2",
@@ -90,7 +90,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.0.*"
+            "require": "5.1.*"
         }
     }
 }
