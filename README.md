@@ -25,7 +25,7 @@
 - `yarn install` to get the assets dependencies.
 - `php bin/console doctrine:database:create` to create database.
 - `php bin/console doctrine:migrations:migrate` to setup database structure.
-- `php bin/console doctrines:fixtures:load` to load data.
+- `php bin/console doctrine:fixtures:load` to load data.
 
 ---
 
@@ -41,6 +41,7 @@
 - create `phpunit.xml` based on `phpunit.xml.dist`
 - add the following to your local `phpunit.xml` file, under `<php>` :
     - `<env name="BOOTSTRAP_LOCAL_TEST_ENV" value="test"/>` to force execution in test environment.
+- `composer testsbaseline` to run the tests and build a generate a baseline file for deprecations notices.
 - `composer tests` to run the tests.
 
 ---

@@ -39,8 +39,9 @@ final class SectionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (null !== $form->get('image')->getData()) {
-                $uploadParams = $this->getParameter('uploads')['section_images'];
-                $imageFilename = $imageUploader->upload($form->get('image')->getData(), $uploadParams);
+                $uploadParams = $this->getParameter('uploads');
+                $sectionUploadParams = is_array($uploadParams) ? $uploadParams['section_images'] : null;
+                $imageFilename = $imageUploader->upload($form->get('image')->getData(), $sectionUploadParams);
 
                 $this->handleUploadResult($imageFilename, $section);
             }
@@ -80,10 +81,11 @@ final class SectionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (null !== $form->get('image')->getData()) {
-                $uploadParams = $this->getParameter('uploads')['section_images'];
+                $uploadParams = $this->getParameter('uploads');
+                $sectionUploadParams = is_array($uploadParams) ? $uploadParams['section_images'] : null;
                 $imageFilename = $imageUploader->upload(
                     $form->get('image')->getData(),
-                    $uploadParams,
+                    $sectionUploadParams,
                     $section->getImageFilename()
                 );
 
@@ -109,11 +111,11 @@ final class SectionController extends AbstractController
     public function delete(Request $request, Section $section, ImageUploader $imageUploader): Response
     {
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->request->get('_token'))) {
+            $uploadParams = $this->getParameter('uploads');
+            $sectionUploadParams = is_array($uploadParams) ? $uploadParams['section_images'] : null;
+
             if (null !== $section->getImageFilename()) {
-                $imageUploader->remove(
-                    $section->getImageFilename(),
-                    $this->getParameter('uploads')['section_images']
-                );
+                $imageUploader->remove($section->getImageFilename(), $sectionUploadParams, );
             }
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -132,11 +134,11 @@ final class SectionController extends AbstractController
     public function deleteImage(Request $request, Section $section, ImageUploader $imageUploader): Response
     {
         if ($this->isCsrfTokenValid('delete_image'.$section->getId(), $request->request->get('_token'))) {
+            $uploadParams = $this->getParameter('uploads');
+            $sectionUploadParams = is_array($uploadParams) ? $uploadParams['section_images'] : null;
+
             if (null !== $section->getImageFilename()) {
-                $imageUploader->remove(
-                    $section->getImageFilename(),
-                    $this->getParameter('uploads')['section_images']
-                );
+                $imageUploader->remove($section->getImageFilename(), $sectionUploadParams, );
 
                 $section->setImageFilename(null);
             }

@@ -60,7 +60,9 @@ abstract class AppTestCase extends WebTestCase
     private function assertLogged($email, array $roles): void
     {
         /** @var UserInterface $user */
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy([
+            'email' => $email,
+        ]);
 
         if (null !== $this->kernelBrowser->getContainer()) {
             /** @var Session|mixed[] $session */

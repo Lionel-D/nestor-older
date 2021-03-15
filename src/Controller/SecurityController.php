@@ -44,9 +44,7 @@ final class SecurityController extends AbstractController
      */
     public function logout(): void
     {
-        throw new LogoutException(
-            'This method can be blank - it will be intercepted by the logout key on your firewall.'
-        );
+        throw new LogoutException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
     /**

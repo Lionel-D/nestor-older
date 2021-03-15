@@ -219,17 +219,13 @@ final class SectionControllerTest extends AppTestCase
         $crawler = $this->kernelBrowser->request('GET', '/app/section/');
 
         $sectionList = $crawler->filter('table')->first()->filter('tr')->each(
-            function ($tr, $i) {
-                return [
-                    'id' => $tr->attr('id'),
-                    'cols' => $tr->filter('td')->each(function ($td, $i) {
-                        return [
-                            'img' => $td->children()->attr('src'),
-                            'text' => $td->text(),
-                        ];
-                    }),
-                ];
-            }
+            fn ($tr, $i) => [
+                'id' => $tr->attr('id'),
+                'cols' => $tr->filter('td')->each(fn ($td, $i) => [
+                    'img' => $td->children()->attr('src'),
+                    'text' => $td->text(),
+                ]),
+            ]
         );
 
         return array_pop($sectionList);

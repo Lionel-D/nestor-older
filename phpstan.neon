@@ -1,5 +1,4 @@
 includes:
-    - vendor/symplify/coding-standard/config/symplify-rules.neon
     - vendor/symplify/phpstan-extensions/config/config.neon
 parameters:
     level: 8
@@ -8,7 +7,6 @@ parameters:
         - tests
     excludes_analyse:
         - src/Kernel.php
-        - src/Migrations/*
         - src/DataFixtures/*
-    autoload_files:
-        - bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
+    bootstrapFiles:
+        - vendor/bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
