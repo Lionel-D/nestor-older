@@ -22,6 +22,11 @@ final class RegistrationType extends AbstractType
      */
     private $passwordConstraints = [];
 
+    /**
+     * @var mixed[]
+     */
+    private $termsConstraints = [];
+
     public function __construct()
     {
         $this->passwordConstraints = [
@@ -45,6 +50,12 @@ final class RegistrationType extends AbstractType
             new Regex([
                 'pattern' => '/(\W|_)+/',
                 'message' => 'no_symbol_password',
+            ]),
+        ];
+
+        $this->termsConstraints = [
+            new IsTrue([
+                'message' => 'terms_not_checked',
             ]),
         ];
     }
@@ -76,9 +87,7 @@ final class RegistrationType extends AbstractType
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label' => 'agree_terms_label',
-                'constraints' => [
-                    new IsTrue(['message' => 'terms_not_checked']),
-                ],
+                'constraints' => $this->termsConstraints,
                 'translation_domain' => 'security',
             ])
         ;
