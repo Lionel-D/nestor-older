@@ -41,7 +41,7 @@
 - create `phpunit.xml` based on `phpunit.xml.dist`
 - add the following to your local `phpunit.xml` file, under `<php>` :
     - `<env name="BOOTSTRAP_LOCAL_TEST_ENV" value="test"/>` to force execution in test environment.
-- `composer testsbaseline` to run the tests and build a generate a baseline file for deprecations notices.
+- `composer testsbaseline` to run the tests and generate a baseline file for deprecations notices.
 - `composer tests` to run the tests.
 
 ---
