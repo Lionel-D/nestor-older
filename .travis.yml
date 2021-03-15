@@ -2,7 +2,7 @@
 language: php
 
 # Language version
-php: 7.3.22
+php: 7.4.16
 
 services:
     - mysql
@@ -35,7 +35,6 @@ install:
     - nvm install 10.20.1
     - composer install
     - cp .env.test .env
-    - ./bin/phpunit install
     - yarn install
 
 # Build assets, link CodeClimate coverage reporter
@@ -47,13 +46,13 @@ before_script:
 
 # Run tests
 script:
-    - ./bin/phpunit --coverage-clover clover.xml
+    - ./vendor/bin/phpunit --coverage-clover clover.xml
     # this checks that the YAML config files contain no syntax errors
-    - ./bin/console lint:yaml config --parse-tags
+    - ./vendor/bin/console lint:yaml config --parse-tags
     # this checks that the Twig template files contain no syntax errors
-    - ./bin/console lint:twig templates --env=prod
+    - ./vendor/bin/console lint:twig templates --env=prod
     # this checks that the XLIFF translations contain no syntax errors
-    - ./bin/console lint:xliff translations
+    - ./vendor/bin/console lint:xliff translations
     # this checks that Doctrine's mapping configurations are valid
     #- ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
 
