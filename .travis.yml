@@ -25,7 +25,7 @@ cache:
     yarn: true
     directories:
         - $HOME/.composer/cache/files
-        - ./bin/.phpunit
+        - ./vendor/bin/.phpunit
 
 # Update composer
 before_install:
@@ -36,6 +36,7 @@ install:
     - nvm install 10.20.1
     - composer install
     - cp .env.test .env
+    - ./vendor/bin/phpunit install
     - yarn install
 
 # Build assets, link CodeClimate coverage reporter
