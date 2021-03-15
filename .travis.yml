@@ -48,7 +48,7 @@ before_script:
 
 # Run tests
 script:
-    - ./bin/phpunit --coverage-clover clover.xml
+    - SYMFONY_DEPRECATIONS_HELPER='baselineFile=./tests/allowed.json' ./bin/phpunit --coverage-clover clover.xml
     # this checks that the YAML config files contain no syntax errors
     - ./vendor/bin/console lint:yaml config --parse-tags
     # this checks that the Twig template files contain no syntax errors
