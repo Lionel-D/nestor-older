@@ -10,7 +10,7 @@
 
 ### Requirements
 
-- **[PHP](https://www.php.net/)** `7.2.5 or greater`
+- **[PHP](https://www.php.net/)** `7.4.15 or greater`
 - **[MySQL](https://www.mysql.com/)** `8.0.19 or greater`
 - **[Composer](https://getcomposer.org/)** `1.10.6 or greater`
 - **[Yarn](https://yarnpkg.com)** `1.22.4 or greater`
@@ -25,7 +25,7 @@
 - `yarn install` to get the assets dependencies.
 - `php bin/console doctrine:database:create` to create database.
 - `php bin/console doctrine:migrations:migrate` to setup database structure.
-- `php bin/console doctrines:fixtures:load` to load data.
+- `php bin/console doctrine:fixtures:load` to load data.
 
 ---
 
@@ -41,6 +41,8 @@
 - create `phpunit.xml` based on `phpunit.xml.dist`
 - add the following to your local `phpunit.xml` file, under `<php>` :
     - `<env name="BOOTSTRAP_LOCAL_TEST_ENV" value="test"/>` to force execution in test environment.
+    - `<env name="DATABASE_URL" value="mysql://db_user:db_password@127.0.0.1:3306/nestor_test"/>` with the credentials for your local database
+- `composer testsbaseline` to run the tests and generate a baseline file for deprecations notices.
 - `composer tests` to run the tests.
 
 ---

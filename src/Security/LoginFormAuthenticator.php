@@ -50,9 +50,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
      */
     private $userPasswordEncoder;
 
-    /**
-     * LoginFormAuthenticator constructor.
-     */
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
@@ -100,7 +97,9 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy([
+            'email' => $credentials['email'],
+        ]);
 
         if (null === $user) {
             // fail authentication with a custom error

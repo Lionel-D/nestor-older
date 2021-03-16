@@ -43,7 +43,7 @@ final class ImageUploader
      */
     public function upload($uploadedFile, $uploadParams, $replacedFilename = null)
     {
-        if (null === $uploadedFile->getClientOriginalName()) {
+        if ('' === $uploadedFile->getClientOriginalName()) {
             throw new FileException('No original name for uploaded file');
         }
 

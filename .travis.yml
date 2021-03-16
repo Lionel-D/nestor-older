@@ -2,7 +2,8 @@
 language: php
 
 # Language version
-php: 7.3.22
+php:
+    - '7.4'
 
 services:
     - mysql
@@ -40,6 +41,7 @@ install:
 
 # Build assets, link CodeClimate coverage reporter
 before_script:
+    - export XDEBUG_MODE=coverage
     - yarn encore dev
     - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
@@ -47,7 +49,7 @@ before_script:
 
 # Run tests
 script:
-    - ./bin/phpunit --coverage-clover clover.xml
+    - SYMFONY_DEPRECATIONS_HELPER='baselineFile=./tests/allowed.json' ./bin/phpunit --coverage-clover clover.xml
     # this checks that the YAML config files contain no syntax errors
     - ./bin/console lint:yaml config --parse-tags
     # this checks that the Twig template files contain no syntax errors
@@ -55,7 +57,7 @@ script:
     # this checks that the XLIFF translations contain no syntax errors
     - ./bin/console lint:xliff translations
     # this checks that Doctrine's mapping configurations are valid
-    #- ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+    - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
 
 # Call codeclimate reporter for test coverage
 after_script:
