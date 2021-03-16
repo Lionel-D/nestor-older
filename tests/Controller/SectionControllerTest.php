@@ -172,6 +172,47 @@ final class SectionControllerTest extends AppTestCase
         $this->assertSelectorTextContains('.alert-success', 'Section deleted !');
     }
 
+    public function testNewSuccessfulWIthImage(): void
+    {
+        $this->assertLoggedAsUser();
+
+        $crawler = $this->successfullyLoadCreatePage();
+        $testImage = new UploadedFile(__DIR__.'/../vegetables.jpg', 'vegetables.jpg', 'image/jpeg');
+        $formData = [
+            'name' => 'Some Other Section',
+            'description' => '',
+            'image' => $testImage,
+        ];
+
+        $this->fillAndSubmitSectionForm($crawler, $formData);
+
+        $this->assertResponseRedirects('/app/section/');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('.alert-success', 'Section added !');
+        $this->assertSelectorTextContains('table', 'Some Other Section');
+
+        $testSection = $this->getLastAddedSection();
+
+        $this->assertStringContainsString('/uploads/section/tiny_vegetables', $testSection['cols'][0]['img']);
+        $this->assertFileExists(__DIR__.'/../../public/'.$testSection['cols'][0]['img']);
+    }
+
+    public function testDeleteSuccessfulWithImage(): void
+    {
+        $this->assertLoggedAsUser();
+
+        $testSection = $this->getLastAddedSection();
+        $crawler = $this->kernelBrowser->request('GET', '/app/section/');
+        $form = $crawler->selectButton('section_'.$testSection['id'].'_submit')->form();
+
+        $this->kernelBrowser->submit($form);
+
+        $this->assertResponseRedirects('/app/section/');
+        $this->kernelBrowser->followRedirect();
+        $this->assertSelectorTextContains('.alert-success', 'Section deleted !');
+        $this->assertFileNotExists(__DIR__.'/../../public/'.$testSection['cols'][0]['img']);
+    }
+
     private function successfullyLoadCreatePage(): Crawler
     {
         $crawler = $this->kernelBrowser->request('GET', '/app/section/new');
