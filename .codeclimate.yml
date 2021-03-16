@@ -6,11 +6,11 @@ checks:
 exclude_patterns:
     - "bin/"
     - "config/"
+    - "migrations/"
     - "nodes_modules/"
     - "public/"
     - "translations/"
     - "var/"
     - "vendor/"
-    - "migrations/"
     - "src/DataFixtures/"
     - "src/Kernel.php"
