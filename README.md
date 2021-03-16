@@ -10,7 +10,7 @@
 
 ### Requirements
 
-- **[PHP](https://www.php.net/)** `7.2.5 or greater`
+- **[PHP](https://www.php.net/)** `7.4.15 or greater`
 - **[MySQL](https://www.mysql.com/)** `8.0.19 or greater`
 - **[Composer](https://getcomposer.org/)** `1.10.6 or greater`
 - **[Yarn](https://yarnpkg.com)** `1.22.4 or greater`
