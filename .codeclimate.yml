@@ -13,3 +13,4 @@ exclude_patterns:
     - "vendor/"
     - "migrations/"
     - "src/DataFixtures/"
+    - "src/Kernel.php"
