@@ -68,7 +68,7 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
-        "testsbasline": "SYMFONY_DEPRECATIONS_HELPER='generateBaseline=true&baselineFile=./tests/allowed.json' ./vendor/bin/simple-phpunit",
+        "testsbaseline": "SYMFONY_DEPRECATIONS_HELPER='generateBaseline=true&baselineFile=./tests/allowed.json' ./vendor/bin/simple-phpunit",
         "tests": "SYMFONY_DEPRECATIONS_HELPER='baselineFile=./tests/allowed.json' ./vendor/bin/simple-phpunit",
         "ecsclear": "vendor/bin/ecs check --clear-cache --ansi",
         "ecs": "vendor/bin/ecs check --fix --ansi",

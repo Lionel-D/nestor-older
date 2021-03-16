@@ -60,6 +60,16 @@
         "count": 4
     },
     {
+        "location": "App\\Tests\\Controller\\SectionControllerTest::testNewSuccessfulWIthImage",
+        "message": "Since symfony/monolog-bridge 5.2: Passing an actionLevel (int|string) as constructor's 3rd argument of \"Symfony\\Bridge\\Monolog\\Handler\\FingersCrossed\\HttpCodeActivationStrategy\" is deprecated, \"Monolog\\Handler\\FingersCrossed\\ActivationStrategyInterface\" expected.",
+        "count": 4
+    },
+    {
+        "location": "App\\Tests\\Controller\\SectionControllerTest::testDeleteSuccessfulWithImage",
+        "message": "Since symfony/monolog-bridge 5.2: Passing an actionLevel (int|string) as constructor's 3rd argument of \"Symfony\\Bridge\\Monolog\\Handler\\FingersCrossed\\HttpCodeActivationStrategy\" is deprecated, \"Monolog\\Handler\\FingersCrossed\\ActivationStrategyInterface\" expected.",
+        "count": 4
+    },
+    {
         "location": "App\\Tests\\Controller\\SecurityControllerTest::testLoginFailedWrongPassword",
         "message": "Since symfony/monolog-bridge 5.2: Passing an actionLevel (int|string) as constructor's 3rd argument of \"Symfony\\Bridge\\Monolog\\Handler\\FingersCrossed\\HttpCodeActivationStrategy\" is deprecated, \"Monolog\\Handler\\FingersCrossed\\ActivationStrategyInterface\" expected.",
         "count": 3
