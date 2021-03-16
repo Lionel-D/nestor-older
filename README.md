@@ -41,6 +41,7 @@
 - create `phpunit.xml` based on `phpunit.xml.dist`
 - add the following to your local `phpunit.xml` file, under `<php>` :
     - `<env name="BOOTSTRAP_LOCAL_TEST_ENV" value="test"/>` to force execution in test environment.
+    - `<env name="DATABASE_URL" value="mysql://db_user:db_password@127.0.0.1:3306/nestor_test"/>` with the credentials for your local database
 - `composer testsbaseline` to run the tests and generate a baseline file for deprecations notices.
 - `composer tests` to run the tests.
 
